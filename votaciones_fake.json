@@ -1,0 +1,765 @@
+{
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "Mejor Streamer",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Streamer1",
+          "votos": [
+            {
+              "usuario": "usuario54",
+              "fecha": "2024-10-14T00:00:00"
+            },
+            {
+              "usuario": "usuario10",
+              "fecha": "2024-12-28T00:00:00"
+            },
+            {
+              "usuario": "usuario62",
+              "fecha": "2024-12-06T00:00:00"
+            },
+            {
+              "usuario": "usuario28",
+              "fecha": "2024-06-05T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/streamer1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Streamer2",
+          "votos": [],
+          "imagen": "/imagenes/streamer2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Streamer3",
+          "votos": [
+            {
+              "usuario": "usuario51",
+              "fecha": "2024-04-10T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/streamer3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Streamer4",
+          "votos": [
+            {
+              "usuario": "usuario23",
+              "fecha": "2024-09-15T00:00:00"
+            },
+            {
+              "usuario": "usuario3",
+              "fecha": "2024-08-26T00:00:00"
+            },
+            {
+              "usuario": "usuario86",
+              "fecha": "2024-02-24T00:00:00"
+            },
+            {
+              "usuario": "usuario25",
+              "fecha": "2024-07-19T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/streamer4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Evento del A\u00f1o",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Evento1",
+          "votos": [
+            {
+              "usuario": "usuario49",
+              "fecha": "2024-04-07T00:00:00"
+            },
+            {
+              "usuario": "usuario54",
+              "fecha": "2024-03-11T00:00:00"
+            },
+            {
+              "usuario": "usuario94",
+              "fecha": "2024-03-06T00:00:00"
+            },
+            {
+              "usuario": "usuario86",
+              "fecha": "2024-03-21T00:00:00"
+            },
+            {
+              "usuario": "usuario95",
+              "fecha": "2024-05-26T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/evento1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Evento2",
+          "votos": [
+            {
+              "usuario": "usuario88",
+              "fecha": "2024-10-12T00:00:00"
+            },
+            {
+              "usuario": "usuario43",
+              "fecha": "2024-04-26T00:00:00"
+            },
+            {
+              "usuario": "usuario32",
+              "fecha": "2024-10-12T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/evento2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Evento3",
+          "votos": [
+            {
+              "usuario": "usuario92",
+              "fecha": "2024-04-16T00:00:00"
+            },
+            {
+              "usuario": "usuario40",
+              "fecha": "2024-02-25T00:00:00"
+            },
+            {
+              "usuario": "usuario4",
+              "fecha": "2024-06-12T00:00:00"
+            },
+            {
+              "usuario": "usuario70",
+              "fecha": "2024-04-12T00:00:00"
+            },
+            {
+              "usuario": "usuario96",
+              "fecha": "2024-07-02T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/evento3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Evento4",
+          "votos": [
+            {
+              "usuario": "usuario11",
+              "fecha": "2024-03-11T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/evento4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Mejor Juego",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Juego1",
+          "votos": [
+            {
+              "usuario": "usuario60",
+              "fecha": "2024-12-16T00:00:00"
+            },
+            {
+              "usuario": "usuario21",
+              "fecha": "2024-03-27T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/juego1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Juego2",
+          "votos": [
+            {
+              "usuario": "usuario16",
+              "fecha": "2024-10-04T00:00:00"
+            },
+            {
+              "usuario": "usuario31",
+              "fecha": "2024-09-01T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/juego2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Juego3",
+          "votos": [
+            {
+              "usuario": "usuario97",
+              "fecha": "2024-10-27T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/juego3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Juego4",
+          "votos": [
+            {
+              "usuario": "usuario52",
+              "fecha": "2024-04-13T00:00:00"
+            },
+            {
+              "usuario": "usuario72",
+              "fecha": "2024-02-16T00:00:00"
+            },
+            {
+              "usuario": "usuario98",
+              "fecha": "2024-08-03T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/juego4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Momento \u00c9pico",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Momento1",
+          "votos": [
+            {
+              "usuario": "usuario79",
+              "fecha": "2024-02-14T00:00:00"
+            },
+            {
+              "usuario": "usuario16",
+              "fecha": "2024-07-25T00:00:00"
+            },
+            {
+              "usuario": "usuario12",
+              "fecha": "2024-08-23T00:00:00"
+            },
+            {
+              "usuario": "usuario51",
+              "fecha": "2024-08-27T00:00:00"
+            },
+            {
+              "usuario": "usuario5",
+              "fecha": "2024-11-18T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/momento1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Momento2",
+          "votos": [
+            {
+              "usuario": "usuario22",
+              "fecha": "2024-07-12T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/momento2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Momento3",
+          "votos": [
+            {
+              "usuario": "usuario41",
+              "fecha": "2024-07-26T00:00:00"
+            },
+            {
+              "usuario": "usuario57",
+              "fecha": "2024-01-15T00:00:00"
+            },
+            {
+              "usuario": "usuario39",
+              "fecha": "2024-03-18T00:00:00"
+            },
+            {
+              "usuario": "usuario52",
+              "fecha": "2024-06-11T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/momento3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Momento4",
+          "votos": [],
+          "imagen": "/imagenes/momento4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nombre": "Enfado del A\u00f1o",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Enfado1",
+          "votos": [
+            {
+              "usuario": "usuario51",
+              "fecha": "2024-05-20T00:00:00"
+            },
+            {
+              "usuario": "usuario81",
+              "fecha": "2024-07-23T00:00:00"
+            },
+            {
+              "usuario": "usuario36",
+              "fecha": "2024-06-02T00:00:00"
+            },
+            {
+              "usuario": "usuario68",
+              "fecha": "2024-10-30T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/enfado1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Enfado2",
+          "votos": [],
+          "imagen": "/imagenes/enfado2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Enfado3",
+          "votos": [],
+          "imagen": "/imagenes/enfado3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Enfado4",
+          "votos": [
+            {
+              "usuario": "usuario24",
+              "fecha": "2024-09-04T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/enfado4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Colaboraci\u00f3n del A\u00f1o",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Colaboraci\u00f3n1",
+          "votos": [
+            {
+              "usuario": "usuario74",
+              "fecha": "2024-05-05T00:00:00"
+            },
+            {
+              "usuario": "usuario65",
+              "fecha": "2024-02-22T00:00:00"
+            },
+            {
+              "usuario": "usuario49",
+              "fecha": "2024-10-09T00:00:00"
+            },
+            {
+              "usuario": "usuario72",
+              "fecha": "2024-04-14T00:00:00"
+            },
+            {
+              "usuario": "usuario73",
+              "fecha": "2024-02-13T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/colaboraci\u00f3n1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Colaboraci\u00f3n2",
+          "votos": [
+            {
+              "usuario": "usuario57",
+              "fecha": "2024-01-18T00:00:00"
+            },
+            {
+              "usuario": "usuario93",
+              "fecha": "2024-01-12T00:00:00"
+            },
+            {
+              "usuario": "usuario58",
+              "fecha": "2024-06-14T00:00:00"
+            },
+            {
+              "usuario": "usuario2",
+              "fecha": "2024-09-07T00:00:00"
+            },
+            {
+              "usuario": "usuario65",
+              "fecha": "2024-09-23T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/colaboraci\u00f3n2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Colaboraci\u00f3n3",
+          "votos": [
+            {
+              "usuario": "usuario89",
+              "fecha": "2024-02-14T00:00:00"
+            },
+            {
+              "usuario": "usuario76",
+              "fecha": "2024-08-14T00:00:00"
+            },
+            {
+              "usuario": "usuario47",
+              "fecha": "2024-02-02T00:00:00"
+            },
+            {
+              "usuario": "usuario8",
+              "fecha": "2024-12-08T00:00:00"
+            },
+            {
+              "usuario": "usuario64",
+              "fecha": "2024-01-13T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/colaboraci\u00f3n3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Colaboraci\u00f3n4",
+          "votos": [
+            {
+              "usuario": "usuario22",
+              "fecha": "2024-11-02T00:00:00"
+            },
+            {
+              "usuario": "usuario100",
+              "fecha": "2024-06-30T00:00:00"
+            },
+            {
+              "usuario": "usuario40",
+              "fecha": "2024-07-14T00:00:00"
+            },
+            {
+              "usuario": "usuario60",
+              "fecha": "2024-05-07T00:00:00"
+            },
+            {
+              "usuario": "usuario11",
+              "fecha": "2024-01-20T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/colaboraci\u00f3n4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "nombre": "Revelaci\u00f3n del A\u00f1o",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Revelaci\u00f3n1",
+          "votos": [
+            {
+              "usuario": "usuario87",
+              "fecha": "2024-01-25T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/revelaci\u00f3n1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Revelaci\u00f3n2",
+          "votos": [
+            {
+              "usuario": "usuario93",
+              "fecha": "2024-07-31T00:00:00"
+            },
+            {
+              "usuario": "usuario50",
+              "fecha": "2024-03-18T00:00:00"
+            },
+            {
+              "usuario": "usuario74",
+              "fecha": "2024-09-12T00:00:00"
+            },
+            {
+              "usuario": "usuario92",
+              "fecha": "2024-04-09T00:00:00"
+            },
+            {
+              "usuario": "usuario70",
+              "fecha": "2024-06-21T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/revelaci\u00f3n2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Revelaci\u00f3n3",
+          "votos": [
+            {
+              "usuario": "usuario86",
+              "fecha": "2024-09-17T00:00:00"
+            },
+            {
+              "usuario": "usuario59",
+              "fecha": "2024-10-27T00:00:00"
+            },
+            {
+              "usuario": "usuario32",
+              "fecha": "2024-12-05T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/revelaci\u00f3n3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Revelaci\u00f3n4",
+          "votos": [
+            {
+              "usuario": "usuario29",
+              "fecha": "2024-03-29T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/revelaci\u00f3n4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nombre": "Mejor Clip",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Clip1",
+          "votos": [
+            {
+              "usuario": "usuario97",
+              "fecha": "2024-04-13T00:00:00"
+            },
+            {
+              "usuario": "usuario71",
+              "fecha": "2024-08-02T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/clip1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Clip2",
+          "votos": [
+            {
+              "usuario": "usuario96",
+              "fecha": "2024-05-19T00:00:00"
+            },
+            {
+              "usuario": "usuario93",
+              "fecha": "2024-04-04T00:00:00"
+            },
+            {
+              "usuario": "usuario48",
+              "fecha": "2024-10-09T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/clip2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Clip3",
+          "votos": [
+            {
+              "usuario": "usuario10",
+              "fecha": "2024-10-14T00:00:00"
+            },
+            {
+              "usuario": "usuario31",
+              "fecha": "2024-11-17T00:00:00"
+            },
+            {
+              "usuario": "usuario26",
+              "fecha": "2024-03-05T00:00:00"
+            },
+            {
+              "usuario": "usuario69",
+              "fecha": "2024-04-12T00:00:00"
+            },
+            {
+              "usuario": "usuario53",
+              "fecha": "2024-11-06T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/clip3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Clip4",
+          "votos": [],
+          "imagen": "/imagenes/clip4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "nombre": "Mejor Comunidad",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Comunidad1",
+          "votos": [
+            {
+              "usuario": "usuario46",
+              "fecha": "2024-03-25T00:00:00"
+            },
+            {
+              "usuario": "usuario29",
+              "fecha": "2024-10-05T00:00:00"
+            },
+            {
+              "usuario": "usuario42",
+              "fecha": "2024-01-20T00:00:00"
+            },
+            {
+              "usuario": "usuario100",
+              "fecha": "2024-07-19T00:00:00"
+            },
+            {
+              "usuario": "usuario100",
+              "fecha": "2024-03-17T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/comunidad1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Comunidad2",
+          "votos": [],
+          "imagen": "/imagenes/comunidad2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Comunidad3",
+          "votos": [
+            {
+              "usuario": "usuario45",
+              "fecha": "2024-06-05T00:00:00"
+            },
+            {
+              "usuario": "usuario66",
+              "fecha": "2024-01-15T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/comunidad3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Comunidad4",
+          "votos": [
+            {
+              "usuario": "usuario86",
+              "fecha": "2024-12-10T00:00:00"
+            },
+            {
+              "usuario": "usuario16",
+              "fecha": "2024-06-24T00:00:00"
+            },
+            {
+              "usuario": "usuario71",
+              "fecha": "2024-08-27T00:00:00"
+            },
+            {
+              "usuario": "usuario85",
+              "fecha": "2024-07-28T00:00:00"
+            },
+            {
+              "usuario": "usuario1",
+              "fecha": "2024-12-12T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/comunidad4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "nombre": "Clip m\u00e1s Viral",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Viral1",
+          "votos": [],
+          "imagen": "/imagenes/viral1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Viral2",
+          "votos": [
+            {
+              "usuario": "usuario25",
+              "fecha": "2024-06-29T00:00:00"
+            },
+            {
+              "usuario": "usuario7",
+              "fecha": "2024-03-07T00:00:00"
+            },
+            {
+              "usuario": "usuario37",
+              "fecha": "2024-12-16T00:00:00"
+            },
+            {
+              "usuario": "usuario12",
+              "fecha": "2024-04-16T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/viral2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Viral3",
+          "votos": [
+            {
+              "usuario": "usuario18",
+              "fecha": "2024-10-07T00:00:00"
+            },
+            {
+              "usuario": "usuario70",
+              "fecha": "2024-04-20T00:00:00"
+            },
+            {
+              "usuario": "usuario46",
+              "fecha": "2024-03-19T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/viral3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Viral4",
+          "votos": [
+            {
+              "usuario": "usuario93",
+              "fecha": "2024-12-09T00:00:00"
+            },
+            {
+              "usuario": "usuario13",
+              "fecha": "2024-12-17T00:00:00"
+            }
+          ],
+          "imagen": "/imagenes/viral4.jpg"
+        }
+      ]
+    }
+  ]
+}

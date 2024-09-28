@@ -1,0 +1,34 @@
+{
+  "usuarios": [
+    {
+      "idUsuario": 1,
+      "username": "usuario1",
+      "pass": "password1",
+      "lastLogin": ""
+    },
+    {
+      "idUsuario": 2,
+      "username": "usuario2",
+      "pass": "password2",
+      "lastLogin": ""
+    },
+    {
+      "idUsuario": 3,
+      "username": "usuario3",
+      "pass": "password3",
+      "lastLogin": ""
+    },
+    {
+      "idUsuario": 4,
+      "username": "usuario4",
+      "pass": "password4",
+      "lastLogin": ""
+    },
+    {
+      "idUsuario": 5,
+      "username": "usuario5",
+      "pass": "password5",
+      "lastLogin": ""
+    }
+  ]
+}
