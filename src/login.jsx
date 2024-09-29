@@ -8,7 +8,8 @@ function Login({ onLoginSuccess }) {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    fetch('http://localhost:3000/updateLastLogin', {  // URL local del backend
+    // fetch('http://localhost:3000/updateLastLogin', {  // URL local del backend
+    fetch('https://capybara-awards-back.vercel.app/updateLastLogin', {  // URL local del backend
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
