@@ -41,6 +41,9 @@ body {
   flex-direction: column;
   align-items: flex-start;
 }
+.powerby{
+  margin-top: 30px;
+}
 
 input {
   margin-top: 5px;
@@ -58,7 +61,7 @@ button {
   padding: 10px 20px;
   border: none;
   background-color: white;  /* Botón blanco */
-  color: black;  /* Texto del botón en negro */
+  color: #f0f0f0;  /* Texto del botón en negro */
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
@@ -67,7 +70,7 @@ button {
 }
 
 button:hover {
-  background-color: #f0f0f0;  /* Cambio de color al pasar el mouse */
+  background-color: black;  /* Cambio de color al pasar el mouse */
 }
 
 button:focus {

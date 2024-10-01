@@ -85,10 +85,7 @@ function Login({ onLoginSuccess }) {
 
             <button onClick={handleLogin}>Login</button>
           </div>
-        </>
-      )}
-
-      {/* Mostrar el mensaje de error y el GIF cuando hay un error */}
+          {/* Mostrar el mensaje de error y el GIF cuando hay un error */}
       {error && (
         <div className="error-container">
           <p className="error">{error}</p>
@@ -99,6 +96,12 @@ function Login({ onLoginSuccess }) {
           />
         </div>
       )}
+          <div className='powerby'>Designed by 🍋</div>
+
+        </>
+      )}
+
+      
     </div>
   );
 }
