@@ -1,8 +1,8 @@
 {
     "rewrites": [
       {
-        "source": "/(.*)",  // Captura todas las rutas no existentes
-        "destination": "/"  // Reescribe todas las rutas a la página principal
+        "source": "/(.*)", 
+        "destination": "/"
       }
     ]
   }
