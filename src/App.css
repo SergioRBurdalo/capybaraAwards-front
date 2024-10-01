@@ -5,31 +5,33 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
+  height: 100vh;  /* Altura completa de la ventana */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Contenedor del login */
 .login-container {
-  max-width: 500px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;  /* Tamaño máximo del contenedor en pantallas grandes */
   padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);  /* Fondo semitransparente */
+  border-radius: 10px;
   text-align: center;
-}
-
-.loading-gif {
-  width: 95%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra para mejorar la apariencia */
 }
 
 /* Formulario de login */
 .login-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 25px;
-  border-radius: 10px;
 }
 
 .input-container {
@@ -48,7 +50,7 @@ input {
   font-size: 1rem;
   background-color: rgba(255, 255, 255, 0.8);  /* Fondo más claro */
   color: black;  /* Texto negro dentro del input */
-  width: 95%;
+  width: 92%;
 }
 
 /* Botón de login */
@@ -72,11 +74,19 @@ button:focus {
   outline: none;
 }
 
+/* Estilos para el GIF de carga */
+.loading-gif {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 /* Estilos para el spinner */
 .spinner-container {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  align-items: center;
 }
 
 /* Estilo para el mensaje de error */
@@ -97,4 +107,26 @@ button:focus {
   width: 200px;
   border-radius: 10px;
   margin-top: 10px;
+}
+
+/* Estilos responsivos para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 90%;  /* El contenedor ocupará el 90% del ancho en móviles */
+    padding: 15px;   /* Reducir el padding en pantallas pequeñas */
+    margin-left: 7px;
+  }
+
+  input {
+    font-size: 0.9rem;  /* Disminuir ligeramente el tamaño del texto en los inputs */
+  }
+
+  button {
+    font-size: 0.9rem;  /* Botón un poco más pequeño en móviles */
+    padding: 8px 15px;  /* Reducir el padding del botón */
+  }
+
+  .error {
+    font-size: 1.2rem;  /* Hacer el texto del error un poco más pequeño en móviles */
+  }
 }
