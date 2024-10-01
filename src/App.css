@@ -1,149 +1,100 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-
-/* Estilos generales */
+/* Fondo general */
 body {
+  background-color: #1E90FF;  /* Azul más oscuro para mejorar el contraste */
   font-family: 'Arial', sans-serif;
-  background-color: #3b93ff;
-  color: #ffffff;
   text-align: center;
   margin: 0;
   padding: 0;
 }
 
-/* Contenedor principal */
-.container {
-  max-width: 1200px;
+/* Contenedor del login */
+.login-container {
+  max-width: 500px;
   margin: 0 auto;
   padding: 20px;
+  text-align: center;
 }
 
-/* Título de la página */
-h1 {
-  font-size: 36px;
-  margin-bottom: 40px;
-}
-
-/* Grid para las opciones */
-.opciones-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-
-/* Cada opción */
-.opcion {
-  background-color: #0054a5;
-  padding: 10px;
-  border-radius: 10px;
-  position: relative;
-}
-
-/* Imagen de la opción */
-.imagen-container {
-  position: relative;
-}
-
-.imagen {
-  width: 100%;
+.loading-gif {
+  width: 95%;
   height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Formulario de login */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 25px;
   border-radius: 10px;
 }
 
-/* Botón de "Ver video" sobre la imagen */
-.ver-video {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 12px;
-}
-
-/* Título de la opción */
-.titulo {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #ffffff;
-}
-
-/* Paginación */
-.pagination {
+.input-container {
+  margin-bottom: 15px;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.prev, .next {
-  background-color: #0054a5;
-  border: none;
+input {
+  margin-top: 5px;
   padding: 10px;
-  color: white;
-  font-size: 18px;
+  border: 2px solid white;  /* Borde blanco para mejor contraste */
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);  /* Fondo más claro */
+  color: black;  /* Texto negro dentro del input */
+  width: 95%;
+}
+
+/* Botón de login */
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: white;  /* Botón blanco */
+  color: black;  /* Texto del botón en negro */
+  font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 50%;
+  font-size: 1rem;
+  margin-top: 10px;
 }
 
-.categoria-info {
-  margin: 0 15px;
-  font-size: 16px;
-  color: white;
-}
-
-/* Hover effects */
-.opcion:hover {
-  background-color: #004080;
-}
-
-.ver-video:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+button:hover {
+  background-color: #f0f0f0;  /* Cambio de color al pasar el mouse */
 }
 
 button:focus {
   outline: none;
+}
+
+/* Estilos para el spinner */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Estilo para el mensaje de error */
+.error-container {
+  margin-top: 20px;
+}
+
+.error {
+  color: #ff4d4d;  /* Rojo más oscuro */
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  text-shadow: 1px 1px 2px black;  /* Sombra para mejorar la legibilidad */
+}
+
+/* Estilo de la imagen del GIF cuando hay un error */
+.error-gif {
+  width: 200px;
+  border-radius: 10px;
+  margin-top: 10px;
 }
