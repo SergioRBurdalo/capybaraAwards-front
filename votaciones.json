@@ -1,0 +1,69 @@
+{
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "Categoría 1",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Opción 1",
+          "votos": [
+            {
+              "usuario": "usuario1",
+              "fecha": "2024-09-14T10:30:00"
+            }
+          ],
+          "imagen": "/imagenes/opcion1.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Opción 2",
+          "votos": [],
+          "imagen": "/imagenes/opcion2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Opción 3",
+          "votos": [],
+          "imagen": "/imagenes/opcion3.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Opción 4",
+          "votos": [],
+          "imagen": "/imagenes/opcion4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Categoría 2",
+      "opciones": [
+        {
+          "id": 1,
+          "texto": "Opción 1",
+          "votos": [],
+          "imagen": "/imagenes/opcion1_categoria2.jpg"
+        },
+        {
+          "id": 2,
+          "texto": "Opción 2",
+          "votos": [],
+          "imagen": "/imagenes/opcion2_categoria2.jpg"
+        },
+        {
+          "id": 3,
+          "texto": "Opción 3",
+          "votos": [],
+          "imagen": "/imagenes/opcion3_categoria2.jpg"
+        },
+        {
+          "id": 4,
+          "texto": "Opción 4",
+          "votos": [],
+          "imagen": "/imagenes/opcion4_categoria2.jpg"
+        }
+      ]
+    }
+  ]
+}
