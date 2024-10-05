@@ -84,21 +84,22 @@ function Candidatos() {
 
       <div className="categorias-grid">
         {categorias.length > 0 ? (
-          categorias.map((categoria, index) => (
+            categorias.map((categoria, index) => (
             <div
-              key={categoria._id}
-              className={`categoria-tarjeta ${flipped[index] ? 'flipped' : ''}`}
-              onClick={() => handleFlip(index)}
+                key={categoria._id}
+                className={`categoria-tarjeta ${flipped[index] ? 'flipped' : ''}`}
+                onClick={() => handleFlip(index)}
             >
-              <div className="card-front" style={{ backgroundColor: categoriaColors[categoria._id] }}>
-                <h2>{categoria.titulo}</h2>
-              </div>
-              <div className="card-back" style={{ backgroundColor: categoriaColors[categoria._id] }}>
+                <div className="card-front" style={{ backgroundColor: categoriaColors[categoria._id] }}>
+                {/* Muestra el número de la categoría seguido del título */}
+                <h2>{index + 1}.<br/> {categoria.titulo}</h2>
+                </div>
+                <div className="card-back" style={{ backgroundColor: categoriaColors[categoria._id] }}>
                 <p>{categoria.descripcion}</p>
                 <button onClick={() => openModal(categoria._id, categoria.titulo)} className="logButton">Votar</button>
-              </div>
+                </div>
             </div>
-          ))
+            ))
         ) : (
           <p>Cargando categorías...</p>
         )}
