@@ -13,6 +13,7 @@ function Login({ onLoginSuccess }) {
   useEffect(() => {
     sessionStorage.setItem('isAuthenticated', 'false');
     sessionStorage.setItem('categorias', "");  
+    sessionStorage.setItem('username', "");  
   }, []);
 
   const handleLogin = () => {
