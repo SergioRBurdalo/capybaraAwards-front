@@ -10,7 +10,7 @@ function Candidatos() {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategoriaId, setSelectedCategoriaId] = useState(null); 
   const [selectedCategoriaTitulo, setSelectedCategoriaTitulo] = useState(null);
-  const [formData, setFormData] = useState({ nombre: '', porque: '' });
+  const [formData, setFormData] = useState({ nombre: '', porque: '', otroNombre: '' });
 
   const pastelColors = [
     '#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#D4C4FB', '#FFCBA4',
@@ -24,8 +24,8 @@ function Candidatos() {
 
   // Hacer la llamada GET al backend para obtener las categorías
   useEffect(() => {
-    fetch('https://capybara-awards-back.vercel.app/getCategorias')  // Reemplaza con la URL de tu backend
-    // fetch('http://localhost:4001/getCategorias')  // Reemplaza con la URL de tu backend
+    // fetch('https://capybara-awards-back.vercel.app/getCategorias')  // Reemplaza con la URL de tu backend
+    fetch('http://localhost:4001/getCategorias')  // Reemplaza con la URL de tu backend
       .then((response) => response.json())
       .then((data) => {
         setCategorias(data);
@@ -61,6 +61,7 @@ function Candidatos() {
     // Restablecer formData cuando el modal se cierra
     setFormData({ nombre: '', porque: '', otroNombre: '' });
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -70,9 +71,33 @@ function Candidatos() {
   };
 
   const handleSubmit = () => {
-    alert(`Voto registrado para categoría: ${selectedCategoriaId}, Nombre: ${formData.nombre}, Porque: ${formData.porque}`);
-    closeModal();  // Cerrar el modal después de enviar
+
+  // Preparar los datos para enviarlos al backend
+  const payload = {
+    categoriaId: selectedCategoriaId,
+    candidato: formData.nombre,
+    nombreOtro: formData.nombre === 'Otro' ? formData.otroNombre : '',  // Solo si es "Otro".
+    usuario: sessionStorage.getItem('username'),  // Aquí puedes cambiar el usuario por uno real si lo tienes.
   };
+
+  // Enviar los datos al backend mediante una solicitud POST
+  fetch('http://localhost:4001/guardarCandidato', {  // Cambia la URL por tu endpoint
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+  .then(response => response.json())
+  .then((data) => {
+    alert('Voto enviado correctamente');
+    closeModal();  // Cerrar el modal después de enviar
+  })
+  .catch((error) => {
+    console.error('Error al enviar el voto:', error);
+    alert('Hubo un error al enviar el voto');
+  });
+};
 
   return (
     <div className="container">
@@ -96,7 +121,7 @@ function Candidatos() {
                 </div>
                 <div className="card-back" style={{ backgroundColor: categoriaColors[categoria._id] }}>
                 <p>{categoria.descripcion}</p>
-                <button onClick={() => openModal(categoria._id, categoria.titulo)} className="logButton">Votar</button>
+                <button onClick={() => openModal(categoria._id, categoria.titulo)} className="logButton">Proponer Candidato</button>
                 </div>
             </div>
             ))

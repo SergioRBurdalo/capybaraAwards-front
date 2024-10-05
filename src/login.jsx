@@ -21,8 +21,8 @@ function Login({ onLoginSuccess }) {
 
     // Forzar un retraso de 4 segundos antes de continuar con la lógica de login
     setTimeout(() => {
-      fetch('https://capybara-awards-back.vercel.app/updateLastLogin', {  // URL del backend
-      // fetch('http://localhost:4001/updateLastLogin', {  // URL del backend
+      // fetch('https://capybara-awards-back.vercel.app/updateLastLogin', {  // URL del backend
+      fetch('http://localhost:4001/updateLastLogin', {  // URL del backend
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,6 +34,7 @@ function Login({ onLoginSuccess }) {
         setLoading(false);  // Ocultar el GIF de carga
         if (data.message === 'Login actualizado correctamente') {
           sessionStorage.setItem('isAuthenticated', 'true');  // Establecer isAuthenticated a true en el login exitoso
+          sessionStorage.setItem("username", username)
           onLoginSuccess();
           navigate('/votaciones');
         } else {
