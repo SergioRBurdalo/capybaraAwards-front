@@ -24,8 +24,8 @@ function Candidatos() {
 
   // Hacer la llamada GET al backend para obtener las categorías
   useEffect(() => {
-    // fetch('https://capybara-awards-back.vercel.app/getCategorias')  // Reemplaza con la URL de tu backend
-    fetch('http://localhost:4001/getCategorias')  // Reemplaza con la URL de tu backend
+    fetch('https://capybara-awards-back.vercel.app/getCategorias')  // Reemplaza con la URL de tu backend
+    // fetch('http://localhost:4001/getCategorias')  // Reemplaza con la URL de tu backend
       .then((response) => response.json())
       .then((data) => {
         setCategorias(data);
@@ -81,7 +81,8 @@ function Candidatos() {
   };
 
   // Enviar los datos al backend mediante una solicitud POST
-  fetch('http://localhost:4001/guardarCandidato', {  // Cambia la URL por tu endpoint
+//   fetch('http://localhost:4001/guardarCandidato', {  // Cambia la URL por tu endpoint
+  fetch('https://capybara-awards-back.vercel.app/guardarCandidato', {  // Cambia la URL por tu endpoint
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
