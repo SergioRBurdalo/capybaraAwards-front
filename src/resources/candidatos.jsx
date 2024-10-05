@@ -77,6 +77,7 @@ function Candidatos() {
     categoriaId: selectedCategoriaId,
     candidato: formData.nombre,
     nombreOtro: formData.nombre === 'Otro' ? formData.otroNombre : '',  // Solo si es "Otro".
+    motivo: formData.porque,
     usuario: sessionStorage.getItem('username'),  // Aquí puedes cambiar el usuario por uno real si lo tienes.
   };
 
