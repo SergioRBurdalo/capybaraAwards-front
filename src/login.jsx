@@ -45,7 +45,7 @@ function Login({ onLoginSuccess }) {
         console.error('Error al actualizar lastLogin:', error);
         setError('Ocurrió un error. Inténtalo de nuevo.');
       });
-    }, 1500);  // Retraso de 4 segundos
+    }, 500);  // Retraso de 4 segundos
   };
 
   // Función para detectar la tecla "Enter" y disparar el login
