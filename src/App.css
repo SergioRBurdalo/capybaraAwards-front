@@ -8,12 +8,142 @@ body {
   font-family: 'Arial', sans-serif;
   text-align: center;
   margin: 0;
+  overflow-y: auto;  /* Permite el scroll vertical */
   padding: 0;
   height: 100vh;  /* Altura completa de la ventana */
   display: flex;
   justify-content: center;
+width: 100%;
   align-items: center;
 }
+html {
+  height: 100%;
+  overflow-y: auto;  /* Permite el scroll vertical */
+  margin: 0;
+  padding: 0;
+  background-color: #1E90FF;  /* Azul más oscuro */
+  font-family: 'Arial', sans-serif;
+}
+
+.imagen-categorias {
+  width: 20%;  /* Ajusta el tamaño de la imagen */
+  display: block;  /* Asegurar que se comporte como bloque */
+  margin: 20px auto;  /* Centrar la imagen horizontalmente */
+  border-radius: 10px;
+  margin-top: 20px;;  /* Opcional, para esquinas redondeadas */
+}
+
+.container {
+  height: 100vh;  /* Ocupa la altura completa de la ventana */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.categoria-titulo {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Estilos del grid */
+.categorias-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* Tres columnas por defecto */
+  gap: 20px;  /* Espacio entre las tarjetas */
+  padding: 20px;
+}
+
+/* Estilos responsivos para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  .categorias-grid {
+    grid-template-columns: repeat(2, 1fr);  /* Dos columnas en pantallas más pequeñas */
+    gap: 15px;  /* Reducimos el espacio entre tarjetas en pantallas pequeñas */
+  }
+
+  .categoria-tarjeta {
+    height: 200px;  /* Ajustamos la altura de las tarjetas en móviles */
+  }
+
+  .categoria-tarjeta h2 {
+    font-size: 1.5rem;  /* Reducimos el tamaño del texto para móviles */
+    word-wrap: break-word;  /* Aseguramos que el texto no se salga */
+  }
+}
+
+/* Estilos responsivos para pantallas extremadamente pequeñas (menos de 480px) */
+@media (max-width: 480px) {
+  .categorias-grid {
+    grid-template-columns: repeat(2, 1fr);  /* Mantener dos columnas en móviles pequeños */
+  }
+
+  .categoria-tarjeta {
+    height: 180px;  /* Reducimos más la altura en móviles pequeños */
+  }
+
+  .categoria-tarjeta h2 {
+    font-size: 1.5rem;  /* Texto un poco más pequeño para pantallas muy pequeñas */
+  }
+}
+
+/* Estilos de la tarjeta y animación flip */
+.categoria-tarjeta {
+  position: relative;
+  width: 100%;
+  height: 250px;  /* Altura fija para las tarjetas */
+  background-color: white;  /* Cambiado dinámicamente en el JSX */
+  border-radius: 15px;  /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* Sombra para el contenedor */
+  transform-style: preserve-3d;  /* Para permitir el efecto de flip 3D */
+  transition: transform 0.8s ease;
+  cursor: pointer;
+}
+
+.categoria-tarjeta:hover {
+  transform: rotateY(180deg);  /* Gira la tarjeta al hacer hover */
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;  /* Ocultar la parte posterior cuando está girada */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 15px;  /* Mantener bordes redondeados al girar */
+}
+
+.card-front {
+  background-color: white; /* Fondo de la parte frontal */
+}
+
+.card-back {
+  transform: rotateY(180deg);  /* Rotar la parte trasera 180 grados */
+  background-color: #f9f9f9;  /* Fondo para la parte trasera */
+  color: black;
+}
+
+.comenzar-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.comenzar-button:hover {
+  background-color: #45a049;
+}
+
+
+
 
 /* Contenedor del login */
 .login-container {

@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logoNoBG from './assets/capyiconNoBG.png';
-
 
 function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
@@ -9,7 +8,11 @@ function Login({ onLoginSuccess }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);  // Estado para el spinner
   const navigate = useNavigate();
-  
+
+  // useEffect para establecer 'isAuthenticated' a false al cargar la página
+  useEffect(() => {
+    sessionStorage.setItem('isAuthenticated', 'false');
+  }, []);
 
   const handleLogin = () => {
     setLoading(true);  // Mostrar el GIF de carga
@@ -18,6 +21,7 @@ function Login({ onLoginSuccess }) {
     // Forzar un retraso de 4 segundos antes de continuar con la lógica de login
     setTimeout(() => {
       fetch('https://capybara-awards-back.vercel.app/updateLastLogin', {  // URL del backend
+      // fetch('http://localhost:4001/updateLastLogin', {  // URL del backend
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,6 +32,7 @@ function Login({ onLoginSuccess }) {
       .then(data => {
         setLoading(false);  // Ocultar el GIF de carga
         if (data.message === 'Login actualizado correctamente') {
+          sessionStorage.setItem('isAuthenticated', 'true');  // Establecer isAuthenticated a true en el login exitoso
           onLoginSuccess();
           navigate('/votaciones');
         } else {
@@ -39,7 +44,7 @@ function Login({ onLoginSuccess }) {
         console.error('Error al actualizar lastLogin:', error);
         setError('Ocurrió un error. Inténtalo de nuevo.');
       });
-    }, 2500);  // Retraso de 4 segundos
+    }, 1500);  // Retraso de 4 segundos
   };
 
   // Función para detectar la tecla "Enter" y disparar el login
@@ -63,10 +68,10 @@ function Login({ onLoginSuccess }) {
         <>
           <div className="login-form">
             <img
-            src={logoNoBG}
-            alt="logoNoBG"
-            className="capyLog"
-          />
+              src={logoNoBG}
+              alt="logoNoBG"
+              className="capyLog"
+            />
             <div className="input-container">
               <label htmlFor="username">Usuario</label>
               <input
@@ -107,8 +112,6 @@ function Login({ onLoginSuccess }) {
 
         </>
       )}
-
-      
     </div>
   );
 }
