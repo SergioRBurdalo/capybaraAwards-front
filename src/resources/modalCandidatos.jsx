@@ -12,7 +12,7 @@ function ModalCandidatos({ formData, handleInputChange, handleSubmit, closeModal
           onChange={handleInputChange}
           className=''
         >
-          <option value="" disabled>Selecciona tu nombre</option>
+          <option value="" disabled>Selecciona tu candidato</option>
           <option value="Limon">Limon</option>
           <option value="Ana">Ana</option>
           <option value="Fanny">Fanny</option>
