@@ -10,6 +10,27 @@ function App() {
     () => sessionStorage.getItem('isAuthenticated') === 'true'
   );
 
+  useEffect(() => {
+    // Cambiar el fondo del body según el estado de autenticación
+    if (isAuthenticated) {
+      // Si está autenticado, aplicar imagen de fondo
+      document.body.style.backgroundImage = "url('./assets/fondo.jpeg')";
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundRepeat = 'no-repeat';
+    } else {
+      // Si no está autenticado, dejar el fondo predeterminado (por ejemplo, color azul)
+      document.body.style.backgroundImage = '';
+      document.body.style.backgroundColor = '#1E90FF';  // Color azul
+    }
+
+    // Cleanup: quitar estilos cuando se desmonte el componente
+    return () => {
+      document.body.style.backgroundImage = '';
+      document.body.style.backgroundColor = '';
+    };
+  }, [isAuthenticated]);
+
   const handleLoginSuccess = () => {
     setIsAuthenticated(true);
     sessionStorage.setItem('isAuthenticated', 'true');  // Guardamos el estado en sessionStorage

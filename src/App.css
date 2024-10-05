@@ -4,10 +4,6 @@ body {
   background-size: cover;  /* Asegura que la imagen cubra todo el contenedor */
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* No repite la imagen */
-  height: 100vh;  /* Asegúrate de que el contenedor cubra toda la pantalla */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #1E90FF;  /* Azul más oscuro para mejorar el contraste */
   font-family: 'Arial', sans-serif;
   text-align: center;
@@ -24,7 +20,7 @@ body {
   width: 100%;
   max-width: 400px;  /* Tamaño máximo del contenedor en pantallas grandes */
   padding: 20px;
-  background-color: rgba(61, 113, 217, 0.95);  /* Fondo semitransparente */
+  background-color: rgba(81, 165, 255, 0.95);  /* Fondo semitransparente */
   border-radius: 10px;
   text-align: center;
   display: flex;
