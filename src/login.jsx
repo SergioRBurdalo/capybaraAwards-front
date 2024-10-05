@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logoNoBG from './assets/capyiconNoBG.png';
+
 
 function Login({ onLoginSuccess }) {
   const [username, setUsername] = useState('');
@@ -7,6 +9,7 @@ function Login({ onLoginSuccess }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);  // Estado para el spinner
   const navigate = useNavigate();
+  
 
   const handleLogin = () => {
     setLoading(true);  // Mostrar el GIF de carga
@@ -59,7 +62,11 @@ function Login({ onLoginSuccess }) {
       ) : (
         <>
           <div className="login-form">
-            <h1>Iniciar Sesión</h1>
+            <img
+            src={logoNoBG}
+            alt="logoNoBG"
+            className="capyLog"
+          />
             <div className="input-container">
               <label htmlFor="username">Usuario</label>
               <input
@@ -83,7 +90,7 @@ function Login({ onLoginSuccess }) {
               />
             </div>
 
-            <button onClick={handleLogin}>Login</button>
+            <button className="logButton" onClick={handleLogin}>Login</button>
           </div>
           {/* Mostrar el mensaje de error y el GIF cuando hay un error */}
       {error && (

@@ -1,5 +1,13 @@
 /* Fondo general */
 body {
+  background-image: url('./assets/fondo.jpeg'); /* Cambia la ruta por la de tu imagen */
+  background-size: cover;  /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+  height: 100vh;  /* Asegúrate de que el contenedor cubra toda la pantalla */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #1E90FF;  /* Azul más oscuro para mejorar el contraste */
   font-family: 'Arial', sans-serif;
   text-align: center;
@@ -16,14 +24,14 @@ body {
   width: 100%;
   max-width: 400px;  /* Tamaño máximo del contenedor en pantallas grandes */
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.1);  /* Fondo semitransparente */
+  background-color: rgba(61, 113, 217, 0.95);  /* Fondo semitransparente */
   border-radius: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);  /* Sombra para mejorar la apariencia */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.8);  /* Sombra para mejorar la apariencia */
 }
 
 /* Formulario de login */
@@ -43,6 +51,26 @@ body {
 }
 .powerby{
   margin-top: 30px;
+}
+
+.logButton{
+  background-color: white;
+  color: black;
+  
+}
+.logButton:hover{
+  background-color: black;
+  color: white;
+  
+}
+.login-BG {
+  background-image: url('./assets/background-image.png'); /* Cambia la ruta por la de tu imagen */
+  background-size: cover;  /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input {
@@ -111,6 +139,11 @@ button:focus {
   border-radius: 10px;
   margin-top: 10px;
 }
+.capyLog {
+  width: 300px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
 
 /* Estilos responsivos para pantallas más pequeñas */
 @media (max-width: 768px) {
@@ -118,6 +151,12 @@ button:focus {
     max-width: 90%;  /* El contenedor ocupará el 90% del ancho en móviles */
     padding: 15px;   /* Reducir el padding en pantallas pequeñas */
     margin-left: 7px;
+  }
+
+  .capyLog {
+    width: 250px;
+    border-radius: 10px;
+    margin-top: 10px;
   }
 
   input {

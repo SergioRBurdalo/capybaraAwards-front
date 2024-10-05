@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './login';  // Importamos el componente Login
-import Votaciones from './votaciones';  // Importamos la página de votaciones
+import Votaciones from './resources/votaciones';  // Importamos la página de votaciones
 import './App.css';
 
 function App() {
