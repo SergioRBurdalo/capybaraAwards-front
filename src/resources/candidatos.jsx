@@ -117,7 +117,7 @@ function Candidatos() {
 
       <br />
       <div className='powerby'>Designed by 🍋</div>
-
+      <br /><br /><br />
       <br />
     </div>
   );
