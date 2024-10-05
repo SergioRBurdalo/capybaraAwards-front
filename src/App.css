@@ -100,8 +100,8 @@ html {
   cursor: pointer;
 }
 
-.categoria-tarjeta:hover {
-  transform: rotateY(180deg);  /* Gira la tarjeta al hacer hover */
+.flipped {
+  transform: rotateY(180deg);  /* Gira la tarjeta cuando tiene la clase 'flipped' */
 }
 
 .card-front, .card-back {
@@ -125,7 +125,109 @@ html {
   transform: rotateY(180deg);  /* Rotar la parte trasera 180 grados */
   background-color: #f9f9f9;  /* Fondo para la parte trasera */
   color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+.card-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+/* Estilos para el overlay del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Estilos del modal */
+.modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;  /* Ajustar el ancho a un 90% del contenedor */
+  max-width: 400px;  /* Ancho máximo para el modal */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  font-size: 1.2rem; /* Ajustar tamaño de fuente */
+}
+
+/* Estilos de los inputs */
+.modal select {
+  width: 90%;  /* Reducir el ancho al 90% */
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;  /* Asegurar que el padding no afecte el tamaño total */
+}
+
+.modal input {
+  width: 90%;  /* Reducir el ancho al 90% */
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;  /* Asegurar que el padding no afecte el tamaño total */
+}
+
+/* Estilos para los botones */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-actions .logButtonClose {
+  background-color: #ed3333; /* Color verde */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.modal-actions .logButtonClose:hover {
+  background-color: #962626;
+}
+
+.modal-actions .logButton {
+  background-color: #4CAF50; /* Color verde */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.modal-actions .logButton:hover {
+  background-color: #387d3b;
+}
+
+.modal-actions .logButton:first-child {
+  margin-right: 10px;
+}
+
+
+
 
 .comenzar-button {
   background-color: #4CAF50;
@@ -177,6 +279,7 @@ html {
 }
 .powerby{
   margin-top: 30px;
+  color:white;
 }
 
 .logButton{
@@ -187,6 +290,11 @@ html {
 .logButton:hover{
   background-color: black;
   color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
   
 }
 .login-BG {

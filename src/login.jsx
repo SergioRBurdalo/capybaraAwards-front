@@ -12,6 +12,7 @@ function Login({ onLoginSuccess }) {
   // useEffect para establecer 'isAuthenticated' a false al cargar la página
   useEffect(() => {
     sessionStorage.setItem('isAuthenticated', 'false');
+    sessionStorage.setItem('categorias', "");  
   }, []);
 
   const handleLogin = () => {
