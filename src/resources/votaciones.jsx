@@ -74,12 +74,12 @@ function Votaciones() {
                 <div className="card-inner">
                   {/* Parte frontal */}
                   <div className="card-front bg-white p-4 rounded-lg shadow-md">
-                  <div className="w-full h-52 mb-4">
-                  <img
+                  <div className="w-full h-full mb-4">
+                    <img
                       src={`src/assets/${opcion.imagen}`}
                       alt={opcion.texto}
-                      className="w-full h-full object-contain rounded"
-                      />
+                      className="w-full h-full object-cover rounded"
+                    />
                   </div>
                     <p className="text-center font-semibold">{opcion.texto}</p>
                   </div>
