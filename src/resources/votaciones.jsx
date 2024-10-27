@@ -66,21 +66,21 @@ function Votaciones() {
             {categorias[categoriaActual].opciones.map((opcion) => (
               <div
                 key={opcion.id}
-                className={`card relative w-full h-64 cursor-pointer ${
+                className={`card relative w-full cursor-pointer ${
                   flipped[opcion.id] ? 'flip' : ''
                 }`}
                 onClick={() => toggleFlip(opcion.id)}
               >
                 <div className="card-inner">
                   {/* Parte frontal */}
-                  <div className="card-front bg-white p-4 rounded-lg shadow-md">
-                  <div className="w-full h-full mb-4">
-                    <img
-                      src={`src/assets/${opcion.imagen}`}
-                      alt={opcion.texto}
-                      className="w-full h-full object-cover rounded"
-                    />
-                  </div>
+                  <div className="card-front bg-white rounded-lg shadow-md overflow-hidden">
+                    <div className="flex justify-center items-center w-full h-full mb-2">
+                      <img
+                        src={`src/assets/${opcion.imagen}`}
+                        alt={opcion.texto}
+                        className="max-h-full w-full object-cover"
+                      />
+                    </div>
                     <p className="text-center font-semibold">{opcion.texto}</p>
                   </div>
 
