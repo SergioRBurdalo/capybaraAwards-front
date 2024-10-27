@@ -15,14 +15,13 @@ function App() {
   useEffect(() => {
     // Cambiar el fondo del body según el estado de autenticación
     if (isAuthenticated) {
-      console.log("holaaaa")
       // Si está autenticado, aplicar imagen de fondo
-      document.body.style.backgroundImage = "url('./assets/fondo.jpeg')";
       document.body.style.backgroundSize = 'cover';
       document.body.style.backgroundPosition = 'center';
       document.body.style.backgroundRepeat = 'no-repeat';
+      document.body.style.backgroundColor = '#1E90FF';
+
     } else {
-      console.log("adiooooos")
       // Si no está autenticado, dejar el fondo predeterminado (por ejemplo, color azul)
       document.body.style.backgroundImage = '';
       document.body.style.backgroundColor = '#1E90FF';  // Color azul
