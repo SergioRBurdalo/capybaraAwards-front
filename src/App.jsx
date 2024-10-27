@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './login';  // Importamos el componente Login
-import Candidatos from './resources/candidatos';  // Importamos la página de candidatos
+import Candidatos from './resources/votaciones';  // Importamos la página de candidatos
+import '../tailwind.css';
 import './App.css';
+
 
 function App() {
   // Al cargar, comprobamos si el usuario está autenticado en sessionStorage

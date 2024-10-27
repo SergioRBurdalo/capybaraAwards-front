@@ -1,0 +1,645 @@
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Enfado del año",
+  "descripcion": "Elige tu favorito",
+  "Orden": 2
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Alex",
+      "idImagen": null,
+      "descripcion": "Explotó porque se eligió alojamiento para despedida de Lázaro, y 2 semanas después Fran se negó por precio",
+      "usuarioPropuesto": "Lemon/Buyi/Adri",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Vila",
+      "idImagen": null,
+      "descripcion": "El Grinch de la Navidad, se rajó de cena 2023, durante la comida de ratas",
+      "usuarioPropuesto": "Carlos/Adri/Ana",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri",
+      "idImagen": null,
+      "descripcion": "Cuando vio, a medio camino, que el plan de Buyi para Navarra suponía un desvío de 1h",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lázaro",
+      "idImagen": null,
+      "descripcion": "Se fue del grupo por no estar invitado a la casa rural",
+      "usuarioPropuesto": "Laura/María",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Capibara más experta",
+  "descripcion": "Elige tu favorito",
+  "Orden": 3
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri",
+      "idImagen": null,
+      "descripcion": "Experto entre expertos, un AS en su campo. Ej: Dominio en facturas de luz y gas",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "idImagen": null,
+      "descripcion": "Un tío culto, pero con poca precisión. El Oráculo de Delfos",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Carlos",
+      "idImagen": null,
+      "descripcion": "Ingenioso con los Excels en ámbito financiero",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "idImagen": null,
+      "descripcion": "Experto en redes y tecnología. Ej: Web Capiwards",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Plan del año",
+  "descripcion": "Ordena tus 3 favoritos",
+  "Orden": 6
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Laura",
+      "idImagen": null,
+      "descripcion": "Casa rural Toledo",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri y Carlos",
+      "idImagen": null,
+      "descripcion": "Maravillosa gestión de Capicena y Capiwards",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Chavi",
+      "idImagen": null,
+      "descripcion": "Viaje Haro/Navarra, plan lleno de aventuras",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Carlos",
+      "idImagen": null,
+      "descripcion": "Comida VIP en Hundred",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Fani",
+      "idImagen": null,
+      "descripcion": "Cumple sorpresa Chavi",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rojas",
+      "idImagen": null,
+      "descripcion": "Su cumple",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Mejor Broma Recurrente",
+  "descripcion": "Ordena tus 3 favoritos",
+  "Orden": 6
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rober",
+      "idImagen": null,
+      "descripcion": "Eh eh, que la pinchas",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rober",
+      "idImagen": null,
+      "descripcion": "Tengue Tengue",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rober y Adri",
+      "idImagen": null,
+      "descripcion": "Sí que lo dijo, yo lo oí",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri (P)",
+      "idImagen": null,
+      "descripcion": "Hay que pensar en la ilusión (de Dani)",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon y Carlos",
+      "idImagen": null,
+      "descripcion": "Hay que ser más flex",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri (P)",
+      "idImagen": null,
+      "descripcion": "Ya estamos cerrando (en tardevieja)",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "idImagen": null,
+      "descripcion": "A que te piso el cuello",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rojas",
+      "idImagen": null,
+      "descripcion": "Silbido del Dandy",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri y Laura (P)",
+      "idImagen": null,
+      "descripcion": "Huele a nevera",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Frase del año",
+  "descripcion": "Ordena tus 3 favoritos",
+  "Orden": 3
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri (P)",
+      "idImagen": null,
+      "descripcion": "Alex: No penséis en vosotros, pensad más en Dani",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Dani",
+      "idImagen": null,
+      "descripcion": "Tú tío, Adri...",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "idImagen": null,
+      "descripcion": "A que me inmolo?",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri (P)",
+      "idImagen": null,
+      "descripcion": "Lázaro: Me esperaba este éxito. Ya he hecho plan, no problem bros",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rober",
+      "idImagen": null,
+      "descripcion": "Tranquis, no pasa nada por no saber, se dice en casa de herrero cuchara de palo",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "idImagen": null,
+      "descripcion": "Lemon: Por eso mataron a Hitler. Adri: Hitler se suicidó. Lemon: Bueno, pero iban a por él",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Chavi",
+      "idImagen": null,
+      "descripcion": "Lemon, te vas a quedar sin amigos",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Capibara más fiel a sus principios",
+  "descripcion": "Elige tu favorito",
+  "Orden": 4
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Chavi",
+      "idImagen": null,
+      "descripcion": "El Constituciones, especialmente por justicia. PERRO SÁNCHEZ",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri",
+      "idImagen": null,
+      "descripcion": "Aún sabiendo que no, dice sí. 4 meses peleando con Portugal por una multa injusta de 5€",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rober",
+      "idImagen": null,
+      "descripcion": "Aún cree que se dice cuchara de palo",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Laura",
+      "idImagen": null,
+      "descripcion": "Le sacas el tema feminismo y echas la tarde",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Capibara networkings",
+  "descripcion": "Elige tu favorito",
+  "Orden": 5
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rojas",
+      "idImagen": null,
+      "descripcion": "Conoce al presi, sus escoltas y al joyero de los Borbones. En Loeches ya conoce a todos. Su tío sabe más de plantas que Chavi y Fani juntos",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "idImagen": null,
+      "descripcion": "Antiguo RRPP. El tipo más conocido de Alcalá, siempre puede recomendarte a alguien",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rober",
+      "idImagen": null,
+      "descripcion": "Quien más mundo y personas conoce. Viaja mucho",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Capibara más estilosa",
+  "descripcion": "Elige tu favorito",
+  "Orden": 1
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Ana",
+      "idImagen": null,
+      "descripcion": "Abrigos peludos y suaves",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "María",
+      "idImagen": null,
+      "descripcion": "Dominio de pizza con servilleta. La joven del grupo, siempre divina, aunque no le ves el pelo",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rojas",
+      "idImagen": null,
+      "descripcion": "Tattoos everywhere y outfit elegante. Gorrito Caillou. Mocasines saltarines",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Fani",
+      "idImagen": null,
+      "descripcion": "La frase 'qué mona va esta chica siempre' es para ella",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Capibara más tardona",
+  "descripcion": "Ordena tus 3 favoritos",
+  "Orden": 2
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Dani",
+      "idImagen": null,
+      "descripcion": "Más probable verle fuera que dentro de hora. Mil historias de por qué llegar tarde. Ej: Se le citó 2.5h antes que al resto y llegó tarde",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Ana",
+      "idImagen": null,
+      "descripcion": "Complejo de Gandalf, llega cuando se lo propone",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "María",
+      "idImagen": null,
+      "descripcion": "Desde que está con Rojas, ya nunca llega 3min antes como antaño. 'Me auto-voto, lo admito'",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Fani",
+      "idImagen": null,
+      "descripcion": "Se sabe de dos eventos donde se llegó tarde por su culpa",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Buyi",
+      "idImagen": null,
+      "descripcion": "'Tenía que sacar a Nalita' partidos de Eurocopa",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Capibara más friki",
+  "descripcion": "Ordena tus 3 favoritos",
+  "Orden": 1
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Fani",
+      "idImagen": null,
+      "descripcion": "Tattoos friki. Ve series en tiempo récord, y se sabe los diálogos. Se pinta la cara de cosas chinas. Si Chavi va a Japón sin ella, divorcio",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "idImagen": null,
+      "descripcion": "Te puede recomendar 27 animes. Se acaba de tatuar a Naruto",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Chavi",
+      "idImagen": null,
+      "descripcion": "Es un friki encubierto",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Buyi",
+      "idImagen": null,
+      "descripcion": "El más friki del Señor de los Anillos",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Carlos",
+      "idImagen": null,
+      "descripcion": "Rey de los platinos (cuenta IG incluida), fiel seguidor de animes. Solo hay que ver su salón",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Capibara más sufrida",
+  "descripcion": "Ordena tus 3 favoritos",
+  "Orden": 4
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Buyi",
+      "idImagen": null,
+      "descripcion": "Accidente de coche",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Judit",
+      "idImagen": null,
+      "descripcion": "Accidente de coche",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Raquel",
+      "idImagen": null,
+      "descripcion": "Accidente de coche. Máster + trabajo + viajes a Navarra por su madre malita. LLeva la agenda de Buyi.",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri",
+      "idImagen": null,
+      "descripcion": "2 accidentes de coche, un menisco roto y una multa injusta de Portugal",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Chavi",
+      "idImagen": null,
+      "descripcion": "Curro + Máster + 2 coches rotos viviendo en Valdeluz, teniendo que regar sus plantas cada 2 semanas",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Dani",
+      "idImagen": null,
+      "descripcion": "Por superar la conspiración china e imponerse a sus 1001 rayadas",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Ana",
+      "idImagen": null,
+      "descripcion": "Año de altibajos en Mercadona y con Oposición. Una luchadora",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+{
+  "idCategoria": "5de69ef7-d7ef-42bb-967f-f3e0e36e4b7e",
+  "tituloCategoria": "Mejor Elemento Audiovisual",
+  "descripcion": "Ordena tus 3 favoritos",
+  "Orden": 5
+  "candidatos": [
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Fani",
+      "descripcion": null,
+      "idImagen": "shrek.png",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Judit",
+      "descripcion": null,
+      "idImagen": "judit.ogg",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Buyi",
+      "descripcion": null,
+      "idImagen": "buyi.ogg",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Rojas",
+      "descripcion": null,
+      "idImagen": "limpieza_tardeo.jpeg",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Adri y Carlos",
+      "descripcion": null,
+      "idImagen": "capi_profile.jpeg",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "descripcion": null,
+      "idImagen": "parking_vino.jpeg",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "María",
+      "descripcion": null,
+      "idImagen": "porro_mentiras.png",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Fani",
+      "descripcion": null,
+      "idImagen": "nevera.png",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+    {
+      "idCandidato": "6702298f232bc9cf58c31fca",
+      "nombreCandidato": "Lemon",
+      "descripcion": null,
+      "idImagen": "Capiweb",
+      "usuarioPropuesto": "",
+      "totalVotos": 0
+    },
+  ],
+  "votaciones": []
+},
+
