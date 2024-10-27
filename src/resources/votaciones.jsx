@@ -71,11 +71,12 @@ const assets = {
 function Votaciones() {
   const [categorias, setCategorias] = useState([]);
   const [categoriaActual, setCategoriaActual] = useState(0);
+  const [modalVisible, setModalVisible] = useState(true); // Controla la visibilidad del modal
 
   useEffect(() => {
     const fetchVotaciones = async () => {
       try {
-        const response = await fetch('http://localhost:4001/getVotaciones');
+        const response = await fetch('https://capybara-awards-back.vercel.app/getVotaciones');
         const data = await response.json();
 
         const categoriasAdaptadas = data.map((categoria) => ({
@@ -84,7 +85,7 @@ function Votaciones() {
           opciones: categoria.candidatos.map((candidato) => ({
             id: candidato.idCandidato,
             texto: candidato.nombreCandidato,
-            imagen: getAsset(candidato.idImagen), // Usa `idImagen` para obtener el archivo
+            imagen: getAsset(candidato.idImagen),
             descripcion: candidato.descripcion,
           })),
         }));
@@ -98,9 +99,8 @@ function Votaciones() {
     fetchVotaciones();
   }, []);
 
-  // Función para obtener la ruta del archivo según el idImagen o nombre de archivo
   const getAsset = (idImagen) => {
-    return assets[idImagen] || 'default-image.png'; // Retorna la imagen o una predeterminada si no existe
+    return assets[idImagen] || 'default-image.png';
   };
 
   const handleNextCategoria = () => {
@@ -122,7 +122,22 @@ function Votaciones() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 relative">
+      {modalVisible && (
+        <div className="fixed inset-0 bg-blue-300  flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Bienvenido a las Votaciones</h2>
+            <p className="mb-4">Este es el evento en el que podrás votar por tus candidatos favoritos. Haz clic en "Comenzar a votar" para iniciar.</p>
+            <button
+              onClick={() => setModalVisible(false)}
+              className="bg-blue-500 text-white py-2 px-4 rounded transition duration-200 hover:bg-blue-600"
+            >
+              Comenzar a votar
+            </button>
+          </div>
+        </div>
+      )}
+
       {categorias.length > 0 && (
         <>
           <div className="bg-blue-100 p-6 rounded-lg shadow-md text-center mb-8">
