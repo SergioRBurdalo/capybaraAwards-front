@@ -1,14 +1,81 @@
 import { useState, useEffect } from 'react';
 
+// Importación de todos los archivos
+import candidatoAdri from '../assets/candidato-adri.jpg';
+import candidatoAlexguti from '../assets/candidato-alexguti.jpg';
+import candidatoAna from '../assets/candidato-ana.jpg';
+import candidatoBuyi from '../assets/candidato-buyi.jpg';
+import candidatoCarlos from '../assets/candidato-carlos.jpg';
+import candidatoChavi from '../assets/candidato-chavi.jpg';
+import candidatoDanino from '../assets/candidato-danino.jpg';
+import candidatoFany from '../assets/candidato-fany.jpg';
+import candidatoJudith from '../assets/candidato-judith.jpg';
+import candidatoLaura from '../assets/candidato-laura.jpg';
+import candidatoLazaro from '../assets/candidato-lazaro.jpg';
+import candidatoMaria from '../assets/candidato-maria.jpg';
+import candidatoRaquel from '../assets/candidato-raquel.jpg';
+import candidatoRobert from '../assets/candidato-robert.jpg';
+import candidatoRobertcuchara from '../assets/candidato-robertcuchara.jpg';
+import candidatoRojas from '../assets/candidato-rojas.jpg';
+import candidatoSergio from '../assets/candidato-sergio.jpg';
+import candidatoVila from '../assets/candidato-vila.jpg';
+import buyiOgg from '../assets/buyi.ogg';
+import juditOgg from '../assets/judit.ogg';
+import capiProfile from '../assets/capi_profile.jpeg';
+import capyawardIco from '../assets/capyaward-ico.png';
+import capyiconNoBG from '../assets/capyiconNoBG.png';
+import carpinchoPng from '../assets/carpincho.png';
+import fondoJpeg from '../assets/fondo.jpeg';
+import limpiezaTardeo from '../assets/limpieza_tardeo.jpeg';
+import neveraPng from '../assets/nevera.png';
+import parkingVino from '../assets/parking_vino.jpeg';
+import porroMentiras from '../assets/porro_mentiras.png';
+import reactSvg from '../assets/react.svg';
+import shrekPng from '../assets/shrek.png';
+
+// Mapeo de archivos con el nombre exacto del archivo como clave
+const assets = {
+  'candidato-adri.jpg': candidatoAdri,
+  'candidato-alexguti.jpg': candidatoAlexguti,
+  'candidato-ana.jpg': candidatoAna,
+  'candidato-buyi.jpg': candidatoBuyi,
+  'candidato-carlos.jpg': candidatoCarlos,
+  'candidato-chavi.jpg': candidatoChavi,
+  'candidato-danino.jpg': candidatoDanino,
+  'candidato-fany.jpg': candidatoFany,
+  'candidato-judith.jpg': candidatoJudith,
+  'candidato-laura.jpg': candidatoLaura,
+  'candidato-lazaro.jpg': candidatoLazaro,
+  'candidato-maria.jpg': candidatoMaria,
+  'candidato-raquel.jpg': candidatoRaquel,
+  'candidato-robert.jpg': candidatoRobert,
+  'candidato-robertcuchara.jpg': candidatoRobertcuchara,
+  'candidato-rojas.jpg': candidatoRojas,
+  'candidato-sergio.jpg': candidatoSergio,
+  'candidato-vila.jpg': candidatoVila,
+  'buyi.ogg': buyiOgg,
+  'judit.ogg': juditOgg,
+  'capi_profile.jpeg': capiProfile,
+  'capyaward-ico.png': capyawardIco,
+  'capyiconNoBG.png': capyiconNoBG,
+  'carpincho.png': carpinchoPng,
+  'fondo.jpeg': fondoJpeg,
+  'limpieza_tardeo.jpeg': limpiezaTardeo,
+  'nevera.png': neveraPng,
+  'parking_vino.jpeg': parkingVino,
+  'porro_mentiras.png': porroMentiras,
+  'react.svg': reactSvg,
+  'shrek.png': shrekPng,
+};
+
 function Votaciones() {
   const [categorias, setCategorias] = useState([]);
   const [categoriaActual, setCategoriaActual] = useState(0);
-  const [showModal, setShowModal] = useState(true); // Estado para controlar el modal
 
   useEffect(() => {
     const fetchVotaciones = async () => {
       try {
-        const response = await fetch('https://capybara-awards-back.vercel.app/getVotaciones');
+        const response = await fetch('http://localhost:4001/getVotaciones');
         const data = await response.json();
 
         const categoriasAdaptadas = data.map((categoria) => ({
@@ -17,7 +84,7 @@ function Votaciones() {
           opciones: categoria.candidatos.map((candidato) => ({
             id: candidato.idCandidato,
             texto: candidato.nombreCandidato,
-            imagen: candidato.idImagen || 'default-image.png',
+            imagen: getAsset(candidato.idImagen), // Usa `idImagen` para obtener el archivo
             descripcion: candidato.descripcion,
           })),
         }));
@@ -31,17 +98,22 @@ function Votaciones() {
     fetchVotaciones();
   }, []);
 
+  // Función para obtener la ruta del archivo según el idImagen o nombre de archivo
+  const getAsset = (idImagen) => {
+    return assets[idImagen] || 'default-image.png'; // Retorna la imagen o una predeterminada si no existe
+  };
+
   const handleNextCategoria = () => {
     if (categoriaActual < categorias.length - 1) {
       setCategoriaActual(categoriaActual + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll al inicio
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const handlePrevCategoria = () => {
     if (categoriaActual > 0) {
       setCategoriaActual(categoriaActual - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll al inicio
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -51,27 +123,7 @@ function Votaciones() {
 
   return (
     <div className="container mx-auto p-4">
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-blue-300 bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg text-center">
-            <h2 className="text-2xl font-bold mb-4">Bienvenido a las Votaciones de los Capyvara Awards 2024</h2>
-            <p className="text-gray-700 mb-8">
-              Aquí tienes un texto de introducción que describe el propósito de la página.
-              Este texto puede contener hasta 300 caracteres o la información que necesites 
-              para que los usuarios comprendan la importancia de su voto. ¡Comienza a votar ahora!
-            </p>
-            <button
-              onClick={() => setShowModal(false)}
-              className="bg-blue-500 text-white py-2 px-4 rounded transition duration-200 hover:bg-blue-600"
-            >
-              Comenzar a votar
-            </button>
-          </div>
-        </div>
-      )}
-
-      {!showModal && categorias.length > 0 && (
+      {categorias.length > 0 && (
         <>
           <div className="bg-blue-100 p-6 rounded-lg shadow-md text-center mb-8">
             <h1 className="text-2xl md:text-3xl font-bold mb-2 text-blue-800">
@@ -88,7 +140,7 @@ function Votaciones() {
               >
                 <div className="w-auto h-auto mb-2 flex justify-center items-center">
                   <img
-                    src={`src/assets/${opcion.imagen}`}
+                    src={opcion.imagen}
                     alt={opcion.texto}
                     className="w-full h-full object-cover rounded"
                   />
