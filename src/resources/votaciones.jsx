@@ -126,7 +126,7 @@ function Votaciones() {
       {modalVisible && (
         <div className="fixed inset-0 bg-blue-300  flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md">
-            <h2 className="text-2xl font-bold mb-4">Bienvenido a las Votaciones</h2>
+            <h2 className="text-2xl font-bold mb-4">Bienvenido a las Votaciones de los Capybara Awards 2024</h2>
             <p className="mb-4">Este es el evento en el que podrás votar por tus candidatos favoritos. Haz clic en "Comenzar a votar" para iniciar.</p>
             <button
               onClick={() => setModalVisible(false)}
