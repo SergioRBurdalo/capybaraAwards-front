@@ -32,6 +32,12 @@ import parkingVino from '../assets/parking_vino.jpeg';
 import porroMentiras from '../assets/porro_mentiras.png';
 import reactSvg from '../assets/react.svg';
 import shrekPng from '../assets/shrek.png';
+import candidatoCarlosSergio from '../assets/candidato-carlos_sergio.jpg';
+import candidatoAdriRobert from '../assets/candidato-adri_rober.jpg';
+import candidatoCarlosAdri from '../assets/candidato-carlos_adri.jpg';
+import candidatoRaquelAdriLaura from '../assets/candidato-raquel_adri_laura.jpg';
+import capiWeb from '../assets/Capiweb.png';
+import sonido from '../assets/sonido.png';
 
 // Mapeo de archivos con el nombre exacto del archivo como clave
 const assets = {
@@ -66,29 +72,53 @@ const assets = {
   'porro_mentiras.png': porroMentiras,
   'react.svg': reactSvg,
   'shrek.png': shrekPng,
+  'candidato-carlos_sergio.jpg': candidatoCarlosSergio,
+  'candidato-adri_rober.jpg': candidatoAdriRobert,
+  'candidato-carlos_adri.jpg': candidatoCarlosAdri,
+  'candidato-raquel_adri_laura.jpg': candidatoRaquelAdriLaura,
+  'Capiweb.png': capiWeb,
+  'sonido.png': sonido,
 };
 
 function Votaciones() {
   const [categorias, setCategorias] = useState([]);
   const [categoriaActual, setCategoriaActual] = useState(0);
-  const [modalVisible, setModalVisible] = useState(true); // Controla la visibilidad del modal
+  const [modalVisible, setModalVisible] = useState(true);
+  const [votados, setVotados] = useState({});
+  const [categoriaVotada, setCategoriaVotada] = useState(null); // Controla si se ha votado en la categoría actual
 
   useEffect(() => {
     const fetchVotaciones = async () => {
       try {
         const response = await fetch('https://capybara-awards-back.vercel.app/getVotaciones');
         const data = await response.json();
+        const nombreUsuario = sessionStorage.getItem('username');
 
-        const categoriasAdaptadas = data.map((categoria) => ({
-          nombre: categoria.tituloCategoria,
-          descripcion: categoria.descripcion,
-          opciones: categoria.candidatos.map((candidato) => ({
-            id: candidato.idCandidato,
-            texto: candidato.nombreCandidato,
-            imagen: getAsset(candidato.idImagen),
-            descripcion: candidato.descripcion,
-          })),
-        }));
+        const categoriasAdaptadas = data
+          .filter((categoria) => !categoria.hidden)
+          .map((categoria) => {
+            // Verificar si el usuario ya ha votado en esta categoría
+            const votoUsuario = categoria.votaciones.find((voto) => voto.nombreUsuario === nombreUsuario);
+
+            // Si el usuario ha votado, mostrar solo el candidato votado, de lo contrario mostrar todos
+            const opciones = votoUsuario
+              ? categoria.candidatos.filter((candidato) => candidato.nombreCandidato === votoUsuario.nombreCandidato)
+              : categoria.candidatos;
+
+            return {
+              idCategoria: categoria.idCategoria,
+              nombre: categoria.tituloCategoria,
+              descripcion: categoria.descripcion,
+              opciones: opciones.map((candidato) => ({
+                id: candidato.idCandidato,
+                texto: candidato.nombreCandidato,
+                imagen: getAsset(candidato.idImagen),
+                descripcion: candidato.descripcion,
+                audio: candidato.idAudio ? getAsset(candidato.idAudio) : null,
+                isVoted: !!votoUsuario, // Marca si ya fue votado
+              })),
+            };
+          });
 
         setCategorias(categoriasAdaptadas);
       } catch (error) {
@@ -106,6 +136,7 @@ function Votaciones() {
   const handleNextCategoria = () => {
     if (categoriaActual < categorias.length - 1) {
       setCategoriaActual(categoriaActual + 1);
+      setCategoriaVotada(null); // Reiniciar el estado de votación de la categoría al cambiar
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -113,18 +144,48 @@ function Votaciones() {
   const handlePrevCategoria = () => {
     if (categoriaActual > 0) {
       setCategoriaActual(categoriaActual - 1);
+      setCategoriaVotada(null); // Reiniciar el estado de votación de la categoría al cambiar
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  const handleVotar = (opcion) => {
-    alert(`Has votado por: ${opcion.texto}`);
+  const handleVotar = async (opcion) => {
+    const nombreUsuario = sessionStorage.getItem('username');
+    const idCategoria = categorias[categoriaActual].idCategoria;
+    const nombreCandidato = opcion.texto;
+
+    try {
+      const response = await fetch('https://capybara-awards-back.vercel.app/guardarVoto', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idCategoria,
+          nombreCandidato,
+          nombreUsuario,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(`Has votado por: ${opcion.texto}`);
+        setVotados((prevVotados) => ({ ...prevVotados, [opcion.id]: true }));
+        setCategoriaVotada(categoriaActual); // Marca la categoría actual como votada
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error al registrar el voto:', error);
+      alert('Hubo un problema al registrar tu voto. Por favor, intenta de nuevo.');
+    }
   };
 
   return (
     <div className="container mx-auto p-4 relative">
       {modalVisible && (
-        <div className="fixed inset-0 bg-blue-300  flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-blue-300 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md">
             <h2 className="text-2xl font-bold mb-4">Bienvenido a las Votaciones de los Capybara Awards 2024</h2>
             <p className="mb-4">Este es el evento en el que podrás votar por tus candidatos favoritos. Haz clic en "Comenzar a votar" para iniciar.</p>
@@ -151,7 +212,9 @@ function Votaciones() {
             {categorias[categoriaActual].opciones.map((opcion) => (
               <div
                 key={opcion.id}
-                className="relative w-full bg-white rounded-lg shadow-md p-4 flex flex-col items-center"
+                className={`relative w-full rounded-lg shadow-md p-4 flex flex-col items-center ${
+                  opcion.isVoted || votados[opcion.id] ? 'bg-green-200' : 'bg-white'
+                }`}
               >
                 <div className="w-auto h-auto mb-2 flex justify-center items-center">
                   <img
@@ -162,12 +225,27 @@ function Votaciones() {
                 </div>
                 <p className="text-xl text-center font-semibold">{opcion.texto}</p>
                 <p className="text-center mt-2">{opcion.descripcion}</p>
-                <button
-                  onClick={() => handleVotar(opcion)}
-                  className="bg-blue-500 text-white py-2 px-4 rounded mt-4 transition duration-200 ease-in-out transform hover:bg-blue-600 hover:scale-105 active:bg-blue-700 active:scale-95"
-                >
-                  Votar
-                </button>
+                
+                {opcion.audio && (
+                  <button
+                    onClick={() => {
+                      const audio = new Audio(opcion.audio);
+                      audio.play();
+                    }}
+                    className="bg-gray-200 text-gray-700 py-1 px-3 rounded mt-2"
+                  >
+                    ▶️ Reproducir Audio
+                  </button>
+                )}
+                
+                {!(categoriaVotada === categoriaActual) && !opcion.isVoted && !votados[opcion.id] && (
+                  <button
+                    onClick={() => handleVotar(opcion)}
+                    className="bg-blue-500 text-white py-2 px-4 rounded mt-4 transition duration-200 ease-in-out transform hover:bg-blue-600 hover:scale-105 active:bg-blue-700 active:scale-95"
+                  >
+                    Votar
+                  </button>
+                )}
               </div>
             ))}
           </div>
