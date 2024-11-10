@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import ConfirmModal from './ConfirmModal';
 import PointConfirmModal from './PointConfirmModal'; // Nuevo modal para puntos
 
-
 // Importación de todos los archivos
 import candidatoAdri from '../assets/candidato-adri.jpg';
 import candidatoAlexguti from '../assets/candidato-alexguti.jpg';
@@ -200,7 +199,7 @@ function Votaciones() {
     const nombreUsuario = sessionStorage.getItem('username');
     const idCategoria = categorias[categoriaActual].idCategoria;
     const tipoPunto = `${3 - puntosSeleccionados.length}Puntos`; // "3Puntos", "2Puntos", o "1Punto"
-  
+
     try {
       await fetch('https://capybara-awards-back.vercel.app/guardarVotoPuntuado', {
         method: 'POST',
@@ -215,10 +214,10 @@ function Votaciones() {
           tipoPunto,
         }),
       });
-  
+
       setPuntosSeleccionados((prev) => [...prev, selectedCandidato]);
       setPointConfirmModalVisible(false);
-  
+
       if (puntosSeleccionados.length + 1 === 3) {
         setCategoriaVotada(categoriaActual);
       }
@@ -227,7 +226,6 @@ function Votaciones() {
       alert('Hubo un problema al registrar tu voto. Por favor, intenta de nuevo.');
     }
   };
-  
 
   return (
     <div className="container mx-auto p-4 relative">
@@ -308,7 +306,7 @@ function Votaciones() {
                     </button>
                   )}
 
-                  {!(categoriaVotada === categoriaActual) && !opcion.isVoted && !votados[opcion.id] && (
+                  {!(categoriaVotada === categoriaActual) && !opcion.isVoted && !votados[opcion.id] && !puntosSeleccionados.find(p => p.id === opcion.id) && (
                     <button
                       onClick={() => handleVotar(opcion)}
                       className="bg-blue-500 text-white py-2 px-4 rounded mt-4 transition duration-200 ease-in-out transform hover:bg-blue-600 hover:scale-105 active:bg-blue-700 active:scale-95"
