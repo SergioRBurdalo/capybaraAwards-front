@@ -202,7 +202,7 @@ function Votaciones() {
     const tipoPunto = `${3 - puntosSeleccionados.length}Puntos`; // "3Puntos", "2Puntos", o "1Punto"
   
     try {
-      await fetch('http://localhost:4001/guardarVotoPuntuado', {
+      await fetch('https://capybara-awards-back.vercel.app/guardarVotoPuntuado', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
