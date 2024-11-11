@@ -91,7 +91,7 @@ function Votaciones() {
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [pointConfirmModalVisible, setPointConfirmModalVisible] = useState(false);
   const [selectedCandidato, setSelectedCandidato] = useState(null);
-  const [puntosSeleccionados, setPuntosSeleccionados] = useState([]); // Para orden de preferencia en multichoise
+  const [puntosSeleccionados, setPuntosSeleccionados] = useState({}); // Guardar puntos seleccionados por categoría
 
   useEffect(() => {
     const fetchVotaciones = async () => {
@@ -104,23 +104,34 @@ function Votaciones() {
           .filter((categoria) => !categoria.hidden)
           .map((categoria) => {
             const votoUsuario = categoria.votaciones.find((voto) => voto.nombreUsuario === nombreUsuario);
-            const opciones = votoUsuario
-              ? categoria.candidatos.filter((candidato) => candidato.nombreCandidato === votoUsuario.nombreCandidato)
-              : categoria.candidatos;
 
-            return {
-              idCategoria: categoria.idCategoria,
-              nombre: categoria.tituloCategoria,
-              descripcion: categoria.descripcion,
-              multichoise: categoria.multichoise,
-              opciones: opciones.map((candidato) => ({
+            const opciones = categoria.candidatos.map((candidato) => {
+              let color = 'bg-white';
+              if (categoria.multichoise && votoUsuario) {
+                if (votoUsuario.tresPuntos === candidato.nombreCandidato) color = 'bg-yellow-300';
+                else if (votoUsuario.dosPuntos === candidato.nombreCandidato) color = 'bg-gray-400';
+                else if (votoUsuario.unPunto === candidato.nombreCandidato) color = 'bg-orange-500';
+              } else if (votoUsuario && votoUsuario.nombreCandidato === candidato.nombreCandidato) {
+                color = 'bg-green-200';
+              }
+
+              return {
                 id: candidato.idCandidato,
                 texto: candidato.nombreCandidato,
                 imagen: getAsset(candidato.idImagen),
                 descripcion: candidato.descripcion,
                 audio: candidato.idAudio ? getAsset(candidato.idAudio) : null,
                 isVoted: !!votoUsuario,
-              })),
+                color: color,
+              };
+            });
+
+            return {
+              idCategoria: categoria.idCategoria,
+              nombre: categoria.tituloCategoria,
+              descripcion: categoria.descripcion,
+              multichoise: categoria.multichoise,
+              opciones: opciones,
             };
           });
 
@@ -141,7 +152,6 @@ function Votaciones() {
     if (categoriaActual < categorias.length - 1) {
       setCategoriaActual(categoriaActual + 1);
       setCategoriaVotada(null);
-      setPuntosSeleccionados([]);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -150,7 +160,6 @@ function Votaciones() {
     if (categoriaActual > 0) {
       setCategoriaActual(categoriaActual - 1);
       setCategoriaVotada(null);
-      setPuntosSeleccionados([]);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -184,6 +193,21 @@ function Votaciones() {
       });
 
       if (response.ok) {
+        const categoriasActualizadas = categorias.map((categoria, index) => {
+          if (index === categoriaActual) {
+            return {
+              ...categoria,
+              opciones: categoria.opciones.map((opcion) =>
+                opcion.texto === selectedCandidato.texto
+                  ? { ...opcion, color: 'bg-green-200', isVoted: true }
+                  : opcion
+              ),
+            };
+          }
+          return categoria;
+        });
+
+        setCategorias(categoriasActualizadas);
         setVotados((prevVotados) => ({ ...prevVotados, [selectedCandidato.id]: true }));
         setCategoriaVotada(categoriaActual);
         setConfirmModalVisible(false);
@@ -198,7 +222,7 @@ function Votaciones() {
   const confirmPuntosVoto = async () => {
     const nombreUsuario = sessionStorage.getItem('username');
     const idCategoria = categorias[categoriaActual].idCategoria;
-    const tipoPunto = `${3 - puntosSeleccionados.length}Puntos`; // "3Puntos", "2Puntos", o "1Punto"
+    const tipoPunto = `${3 - (puntosSeleccionados[categoriaActual]?.length || 0)}Puntos`;
 
     try {
       await fetch('https://capybara-awards-back.vercel.app/guardarVotoPuntuado', {
@@ -215,10 +239,46 @@ function Votaciones() {
         }),
       });
 
-      setPuntosSeleccionados((prev) => [...prev, selectedCandidato]);
+      const categoriasActualizadas = categorias.map((categoria, index) => {
+        if (index === categoriaActual) {
+          return {
+            ...categoria,
+            opciones: categoria.opciones.map((opcion) => {
+              if (opcion.texto === selectedCandidato.texto) {
+                const newColor =
+                  tipoPunto === '3Puntos' ? 'bg-yellow-300' : tipoPunto === '2Puntos' ? 'bg-gray-400' : 'bg-orange-500';
+                return { ...opcion, color: newColor, isVoted: true };
+              }
+              return opcion;
+            }),
+          };
+        }
+        return categoria;
+      });
+
+      setCategorias(categoriasActualizadas);
+      setPuntosSeleccionados((prev) => ({
+        ...prev,
+        [categoriaActual]: [...(prev[categoriaActual] || []), selectedCandidato],
+      }));
       setPointConfirmModalVisible(false);
 
-      if (puntosSeleccionados.length + 1 === 3) {
+      if ((puntosSeleccionados[categoriaActual]?.length || 0) + 1 === 3) {
+        const categoriasFinalizadas = categoriasActualizadas.map((categoria, index) => {
+          if (index === categoriaActual) {
+            return {
+              ...categoria,
+              opciones: categoria.opciones.map((opcion) =>
+                (puntosSeleccionados[categoriaActual] || []).some((p) => p.id === opcion.id) || opcion.texto === selectedCandidato.texto
+                  ? opcion
+                  : { ...opcion, isVoted: true }
+              ),
+            };
+          }
+          return categoria;
+        });
+
+        setCategorias(categoriasFinalizadas);
         setCategoriaVotada(categoriaActual);
       }
     } catch (error) {
@@ -240,7 +300,7 @@ function Votaciones() {
       {pointConfirmModalVisible && (
         <PointConfirmModal
           candidato={selectedCandidato?.texto}
-          puntos={3 - puntosSeleccionados.length}
+          puntos={3 - (puntosSeleccionados[categoriaActual]?.length || 0)}
           onConfirm={confirmPuntosVoto}
           onCancel={() => setPointConfirmModalVisible(false)}
         />
@@ -271,58 +331,45 @@ function Votaciones() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categorias[categoriaActual].opciones.map((opcion, index) => {
-              const colorClass =
-                puntosSeleccionados.length > 0 && puntosSeleccionados[0].id === opcion.id
-                  ? 'bg-yellow-300'
-                  : puntosSeleccionados.length > 1 && puntosSeleccionados[1].id === opcion.id
-                  ? 'bg-gray-400'
-                  : puntosSeleccionados.length > 2 && puntosSeleccionados[2].id === opcion.id
-                  ? 'bg-orange-500'
-                  : opcion.isVoted || votados[opcion.id]
-                  ? 'bg-green-200'
-                  : 'bg-white';
-
-              return (
-                <div
-                  key={opcion.id}
-                  className={`relative w-full rounded-lg shadow-md p-4 flex flex-col items-center ${colorClass}`}
-                >
-                  <div className="w-auto h-auto mb-2 flex justify-center items-center">
-                    <img src={opcion.imagen} alt={opcion.texto} className="w-full h-full object-cover rounded" />
-                  </div>
-                  <p className="text-xl text-center font-semibold">{opcion.texto}</p>
-                  <p className="text-center mt-2">{opcion.descripcion}</p>
-
-                  {opcion.audio && (
-                    <button
-                      onClick={() => {
-                        const audio = new Audio(opcion.audio);
-                        audio.play();
-                      }}
-                      className="bg-gray-200 text-gray-700 py-1 px-3 rounded mt-2"
-                    >
-                      ▶️ Reproducir Audio
-                    </button>
-                  )}
-
-                  {!(categoriaVotada === categoriaActual) && !opcion.isVoted && !votados[opcion.id] && !puntosSeleccionados.find(p => p.id === opcion.id) && (
-                    <button
-                      onClick={() => handleVotar(opcion)}
-                      className="bg-blue-500 text-white py-2 px-4 rounded mt-4 transition duration-200 ease-in-out transform hover:bg-blue-600 hover:scale-105 active:bg-blue-700 active:scale-95"
-                    >
-                      {categorias[categoriaActual].multichoise ? `Seleccionar` : `Votar`}
-                    </button>
-                  )}
+            {categorias[categoriaActual].opciones.map((opcion) => (
+              <div
+                key={opcion.id}
+                className={`relative w-full rounded-lg shadow-md p-4 flex flex-col items-center ${opcion.color}`}
+              >
+                <div className="w-auto h-auto mb-2 flex justify-center items-center">
+                  <img src={opcion.imagen} alt={opcion.texto} className="w-full h-full object-cover rounded" />
                 </div>
-              );
-            })}
+                <p className="text-xl text-center font-semibold">{opcion.texto}</p>
+                <p className="text-center mt-2">{opcion.descripcion}</p>
+
+                {opcion.audio && (
+                  <button
+                    onClick={() => {
+                      const audio = new Audio(opcion.audio);
+                      audio.play();
+                    }}
+                    className="bg-gray-200 text-gray-700 py-1 px-3 rounded mt-2"
+                  >
+                    ▶️ Reproducir Audio
+                  </button>
+                )}
+
+                {!(categoriaVotada === categoriaActual) && !opcion.isVoted && !votados[opcion.id] && (
+                  <button
+                    onClick={() => handleVotar(opcion)}
+                    className="bg-blue-500 text-white py-2 px-4 rounded mt-4 transition duration-200 ease-in-out transform hover:bg-blue-600 hover:scale-105 active:bg-blue-700 active:scale-95"
+                  >
+                    {categorias[categoriaActual].multichoise ? `Seleccionar` : `Votar`}
+                  </button>
+                )}
+              </div>
+            ))}
           </div>
 
           <div className="flex justify-between mt-8">
             <button
               onClick={handlePrevCategoria}
-              disabled={categoriaActual === 0}
+              disabled={categoriaActual === 0 || (categorias[categoriaActual].multichoise && (puntosSeleccionados[categoriaActual]?.length || 0) < 3)}
               className="bg-gray-300 text-gray-700 py-2 px-4 rounded disabled:opacity-50"
             >
               &lt; Anterior
@@ -332,7 +379,7 @@ function Votaciones() {
             </span>
             <button
               onClick={handleNextCategoria}
-              disabled={categoriaActual === categorias.length - 1}
+              disabled={categoriaActual === categorias.length - 1 || (categorias[categoriaActual].multichoise && (puntosSeleccionados[categoriaActual]?.length || 0) < 3)}
               className="bg-gray-300 text-gray-700 py-2 px-4 rounded disabled:opacity-50"
             >
               Siguiente &gt;
