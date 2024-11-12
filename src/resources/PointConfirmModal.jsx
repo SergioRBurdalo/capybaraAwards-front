@@ -11,16 +11,16 @@ function PointConfirmModal({ candidato, puntos, onConfirm, onCancel }) {
         <p className="mb-4">Este voto no se puede deshacer.</p>
         <div className="flex justify-center gap-4">
           <button
-            onClick={onConfirm}
-            className="bg-blue-500 text-white py-2 px-4 rounded transition duration-200 hover:bg-blue-600"
-          >
-            Confirmar
-          </button>
-          <button
             onClick={onCancel}
             className="bg-gray-300 text-gray-700 py-2 px-4 rounded transition duration-200 hover:bg-gray-400"
           >
             Cancelar
+          </button>
+          <button
+            onClick={onConfirm}
+            className="bg-blue-500 text-white py-2 px-4 rounded transition duration-200 hover:bg-blue-600"
+          >
+            Confirmar
           </button>
         </div>
       </div>

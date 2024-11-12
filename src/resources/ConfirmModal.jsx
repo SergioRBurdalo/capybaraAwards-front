@@ -9,16 +9,16 @@ function ConfirmModal({ candidato, onConfirm, onCancel }) {
         <p className="text-red-600 mt-2">Este voto no se podrá deshacer.</p>
         <div className="flex justify-around mt-6">
           <button
-            onClick={onConfirm}
-            className="bg-green-500 text-white py-2 px-4 rounded transition duration-200 hover:bg-green-600"
-          >
-            Confirmar
-          </button>
-          <button
             onClick={onCancel}
             className="bg-red-500 text-white py-2 px-4 rounded transition duration-200 hover:bg-red-600"
           >
             Cancelar
+          </button>
+          <button
+            onClick={onConfirm}
+            className="bg-green-500 text-white py-2 px-4 rounded transition duration-200 hover:bg-green-600"
+          >
+            Confirmar
           </button>
         </div>
       </div>
