@@ -83,6 +83,7 @@ const assets = {
 };
 
 
+
 function Votaciones() {
   const [categorias, setCategorias] = useState([]);
   const [categoriaActual, setCategoriaActual] = useState(0);
@@ -106,15 +107,9 @@ function Votaciones() {
           .filter((categoria) => !categoria.hidden)
           .map((categoria) => {
             const votoUsuario = categoria.votaciones.find((voto) => voto.nombreUsuario === nombreUsuario);
-            const votosPrevios = [];
-
-            if (categoria.multichoise && votoUsuario) {
-              if (votoUsuario.tresPuntos) votosPrevios.push(votoUsuario.tresPuntos);
-              if (votoUsuario.dosPuntos) votosPrevios.push(votoUsuario.dosPuntos);
-              if (votoUsuario.unPunto) votosPrevios.push(votoUsuario.unPunto);
-            }
 
             const opciones = categoria.candidatos.map((candidato) => {
+              // Determina el color según los votos multichoise
               let color = 'bg-white';
               if (categoria.multichoise && votoUsuario) {
                 if (votoUsuario.tresPuntos === candidato.nombreCandidato) color = 'bg-yellow-300';
@@ -130,6 +125,7 @@ function Votaciones() {
                 imagen: getAsset(candidato.idImagen),
                 descripcion: candidato.descripcion,
                 audio: candidato.idAudio ? getAsset(candidato.idAudio) : null,
+                usuarioPropuesto: candidato.usuarioPropuesto, // Agregar usuarioPropuesto
                 isVoted: !!votoUsuario,
                 color: color,
               };
@@ -141,7 +137,6 @@ function Votaciones() {
               descripcion: categoria.descripcion,
               multichoise: categoria.multichoise,
               opciones: opciones,
-              votosCompletos: votosPrevios.length === 3,
             };
           });
 
@@ -344,6 +339,9 @@ function Votaciones() {
                   <img src={opcion.imagen} alt={opcion.texto} className="w-full h-full object-cover rounded" />
                 </div>
                 <p className="text-xl text-center font-semibold">{opcion.texto}</p>
+                {opcion.usuarioPropuesto && opcion.usuarioPropuesto !== "" && (
+                  <p className="text-sm text-center text-gray-500 mt-1">Propuesto por: {opcion.usuarioPropuesto}</p>
+                )}
                 <p className="text-center mt-2">{opcion.descripcion}</p>
 
                 {opcion.audio && (
