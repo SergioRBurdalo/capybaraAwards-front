@@ -82,6 +82,7 @@ const assets = {
   'sonido.png': sonido,
 };
 
+
 function Votaciones() {
   const [categorias, setCategorias] = useState([]);
   const [categoriaActual, setCategoriaActual] = useState(0);
@@ -91,7 +92,8 @@ function Votaciones() {
   const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [pointConfirmModalVisible, setPointConfirmModalVisible] = useState(false);
   const [selectedCandidato, setSelectedCandidato] = useState(null);
-  const [puntosSeleccionados, setPuntosSeleccionados] = useState({}); // Guardar puntos seleccionados por categoría
+  const [puntosSeleccionados, setPuntosSeleccionados] = useState([]); // Para orden de preferencia en multichoise
+  const [botonesNavegacionHabilitados, setBotonesNavegacionHabilitados] = useState(true);
 
   useEffect(() => {
     const fetchVotaciones = async () => {
@@ -104,6 +106,13 @@ function Votaciones() {
           .filter((categoria) => !categoria.hidden)
           .map((categoria) => {
             const votoUsuario = categoria.votaciones.find((voto) => voto.nombreUsuario === nombreUsuario);
+            const votosPrevios = [];
+
+            if (categoria.multichoise && votoUsuario) {
+              if (votoUsuario.tresPuntos) votosPrevios.push(votoUsuario.tresPuntos);
+              if (votoUsuario.dosPuntos) votosPrevios.push(votoUsuario.dosPuntos);
+              if (votoUsuario.unPunto) votosPrevios.push(votoUsuario.unPunto);
+            }
 
             const opciones = categoria.candidatos.map((candidato) => {
               let color = 'bg-white';
@@ -132,26 +141,38 @@ function Votaciones() {
               descripcion: categoria.descripcion,
               multichoise: categoria.multichoise,
               opciones: opciones,
+              votosCompletos: votosPrevios.length === 3,
             };
           });
 
         setCategorias(categoriasAdaptadas);
+        verificarBotonesNavegacion(categoriasAdaptadas[categoriaActual]);
+
       } catch (error) {
         console.error('Error al cargar las votaciones:', error);
       }
     };
 
     fetchVotaciones();
-  }, []);
+  }, [categoriaActual]);
 
   const getAsset = (idImagen) => {
     return assets[idImagen] || 'default-image.png';
+  };
+
+  const verificarBotonesNavegacion = (categoria) => {
+    if (categoria.multichoise && categoria.opciones.filter(op => op.color !== 'bg-white').length < 3) {
+      setBotonesNavegacionHabilitados(false);
+    } else {
+      setBotonesNavegacionHabilitados(true);
+    }
   };
 
   const handleNextCategoria = () => {
     if (categoriaActual < categorias.length - 1) {
       setCategoriaActual(categoriaActual + 1);
       setCategoriaVotada(null);
+      setPuntosSeleccionados([]);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -160,6 +181,7 @@ function Votaciones() {
     if (categoriaActual > 0) {
       setCategoriaActual(categoriaActual - 1);
       setCategoriaVotada(null);
+      setPuntosSeleccionados([]);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
@@ -222,7 +244,7 @@ function Votaciones() {
   const confirmPuntosVoto = async () => {
     const nombreUsuario = sessionStorage.getItem('username');
     const idCategoria = categorias[categoriaActual].idCategoria;
-    const tipoPunto = `${3 - (puntosSeleccionados[categoriaActual]?.length || 0)}Puntos`;
+    const tipoPunto = `${3 - puntosSeleccionados.length}Puntos`;
 
     try {
       await fetch('https://capybara-awards-back.vercel.app/guardarVotoPuntuado', {
@@ -241,45 +263,27 @@ function Votaciones() {
 
       const categoriasActualizadas = categorias.map((categoria, index) => {
         if (index === categoriaActual) {
+          const newColor =
+            tipoPunto === '3Puntos' ? 'bg-yellow-300' : tipoPunto === '2Puntos' ? 'bg-gray-400' : 'bg-orange-500';
+
+          const opcionesActualizadas = categoria.opciones.map((opcion) =>
+            opcion.texto === selectedCandidato.texto ? { ...opcion, color: newColor, isVoted: true } : opcion
+          );
+
           return {
             ...categoria,
-            opciones: categoria.opciones.map((opcion) => {
-              if (opcion.texto === selectedCandidato.texto) {
-                const newColor =
-                  tipoPunto === '3Puntos' ? 'bg-yellow-300' : tipoPunto === '2Puntos' ? 'bg-gray-400' : 'bg-orange-500';
-                return { ...opcion, color: newColor, isVoted: true };
-              }
-              return opcion;
-            }),
+            opciones: opcionesActualizadas,
           };
         }
         return categoria;
       });
 
       setCategorias(categoriasActualizadas);
-      setPuntosSeleccionados((prev) => ({
-        ...prev,
-        [categoriaActual]: [...(prev[categoriaActual] || []), selectedCandidato],
-      }));
+      setPuntosSeleccionados((prev) => [...prev, selectedCandidato]);
       setPointConfirmModalVisible(false);
 
-      if ((puntosSeleccionados[categoriaActual]?.length || 0) + 1 === 3) {
-        const categoriasFinalizadas = categoriasActualizadas.map((categoria, index) => {
-          if (index === categoriaActual) {
-            return {
-              ...categoria,
-              opciones: categoria.opciones.map((opcion) =>
-                (puntosSeleccionados[categoriaActual] || []).some((p) => p.id === opcion.id) || opcion.texto === selectedCandidato.texto
-                  ? opcion
-                  : { ...opcion, isVoted: true }
-              ),
-            };
-          }
-          return categoria;
-        });
-
-        setCategorias(categoriasFinalizadas);
-        setCategoriaVotada(categoriaActual);
+      if (puntosSeleccionados.length + 1 === 3) {
+        verificarBotonesNavegacion(categoriasActualizadas[categoriaActual]);
       }
     } catch (error) {
       console.error('Error al registrar el voto:', error);
@@ -300,7 +304,7 @@ function Votaciones() {
       {pointConfirmModalVisible && (
         <PointConfirmModal
           candidato={selectedCandidato?.texto}
-          puntos={3 - (puntosSeleccionados[categoriaActual]?.length || 0)}
+          puntos={3 - puntosSeleccionados.length}
           onConfirm={confirmPuntosVoto}
           onCancel={() => setPointConfirmModalVisible(false)}
         />
@@ -369,7 +373,7 @@ function Votaciones() {
           <div className="flex justify-between mt-8">
             <button
               onClick={handlePrevCategoria}
-              disabled={categoriaActual === 0 || (categorias[categoriaActual].multichoise && (puntosSeleccionados[categoriaActual]?.length || 0) < 3)}
+              disabled={!botonesNavegacionHabilitados || categoriaActual === 0}
               className="bg-gray-300 text-gray-700 py-2 px-4 rounded disabled:opacity-50"
             >
               &lt; Anterior
@@ -379,7 +383,7 @@ function Votaciones() {
             </span>
             <button
               onClick={handleNextCategoria}
-              disabled={categoriaActual === categorias.length - 1 || (categorias[categoriaActual].multichoise && (puntosSeleccionados[categoriaActual]?.length || 0) < 3)}
+              disabled={!botonesNavegacionHabilitados || categoriaActual === categorias.length - 1}
               className="bg-gray-300 text-gray-700 py-2 px-4 rounded disabled:opacity-50"
             >
               Siguiente &gt;
