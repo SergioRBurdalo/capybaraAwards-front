@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CategoryForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]); // ← Solo del usuario actual
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
   const usuario = sessionStorage.getItem("username") || "Anónimo";
 
-  // 🔹 Cargar las categorías guardadas desde el backend
+  // 🔹 Cargar solo las categorías del usuario actual
   useEffect(() => {
     fetch("https://capybara-awards-back.vercel.app/getCategorias")
-    // fetch("http://localhost:4001/getCategorias")
+      // fetch("http://localhost:4001/getCategorias")
       .then((res) => res.json())
       .then((data) => {
-        setCategories(data);
+        // Filtrar las categorías solo del usuario actual
+        const propias = data.filter((cat) => cat.usuario === usuario);
+        setCategories(propias);
       })
       .catch((err) => console.error("Error cargando categorías:", err));
-  }, []);
+  }, [usuario]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Solo cuenta las categorías del usuario actual
     if (categories.length >= 5) {
       setError("Solo puedes añadir hasta 5 categorías.");
       return;
@@ -54,8 +59,10 @@ export default function CategoryForm() {
       const data = await response.json();
 
       if (response.ok) {
-        // Añadir la nueva categoría al listado
-        setCategories((prev) => [data.categoria, ...prev]);
+        // Solo añadimos si pertenece al usuario actual
+        if (data.categoria.usuario === usuario) {
+          setCategories((prev) => [data.categoria, ...prev]);
+        }
         setTitle("");
         setDescription("");
         setError("");
@@ -70,6 +77,13 @@ export default function CategoryForm() {
     setLoading(false);
   };
 
+  const handleLogout = () => {
+    sessionStorage.setItem("isAuthenticated", "false");
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("categorias");
+    navigate("/login");
+  };
+
   const isFormValid = title.trim() !== "" && description.trim() !== "";
 
   return (
@@ -82,6 +96,10 @@ export default function CategoryForm() {
         <h1 className="text-3xl font-bold text-center text-[#ffb347] mb-6">
           Añadir Categoría
         </h1>
+
+        <p className="text-sm text-center text-[#a9a9ff] mb-4">
+          Has creado {categories.length} de 5 categorías disponibles.
+        </p>
 
         <label className="block text-[#a9a9ff] font-medium mb-2">
           Título de la categoría
@@ -126,8 +144,8 @@ export default function CategoryForm() {
         </button>
       </form>
 
-      {/* LISTA DE CATEGORÍAS */}
-      <div className="grid gap-6 w-full max-w-3xl sm:grid-cols-2 md:grid-cols-3">
+      {/* LISTA DE CATEGORÍAS PROPIAS */}
+      <div className="grid gap-6 w-full max-w-3xl sm:grid-cols-2 md:grid-cols-3 mb-10">
         {categories.map((cat) => (
           <div
             key={cat._id}
@@ -136,15 +154,28 @@ export default function CategoryForm() {
             <h2 className="text-xl font-bold text-[#ffb347] mb-2">
               {cat.titulo}
             </h2>
-            <p className="text-sm text-[#d0cfff] mb-2">
-              {cat.descripcion}
-            </p>
+            <p className="text-sm text-[#d0cfff] mb-2">{cat.descripcion}</p>
             <p className="text-xs text-[#8c8cff]">
-              Propuesto por: <span className="text-[#ffb347]">{cat.usuario}</span>
+              Propuesto por:{" "}
+              <span className="text-[#ffb347]">{cat.usuario}</span>
             </p>
           </div>
         ))}
       </div>
+
+      {/* FOOTER */}
+      <footer className="w-full flex flex-col items-center justify-center mt-10 mb-4 text-center">
+        <button
+          onClick={handleLogout}
+          className="px-6 py-3 rounded-lg text-black font-bold bg-gradient-to-r from-[#ffb347] to-[#ffcc33] hover:shadow-[0_0_20px_#ffb347] transition-all duration-200 mb-3"
+        >
+          Salir
+        </button>
+
+        <p className="text-xs text-[#a9a9ff] opacity-80">
+          © {new Date().getFullYear()} Capybara Awards 🍋 — All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }
