@@ -12,7 +12,7 @@ export default function CategoriasPage() {
   const usuario = sessionStorage.getItem("username") || "Anónimo";
 
   useEffect(() => {
-    fetch("http://localhost:4001/getCategorias")
+    fetch("https://capybara-awards-back.vercel.app/getCategorias")
       .then((res) => res.json())
       .then((data) => setCategorias(data))
       .catch((err) => console.error("Error cargando categorías:", err));
@@ -26,7 +26,7 @@ export default function CategoriasPage() {
     setMensaje("");
 
     try {
-      const res = await fetch("http://localhost:4001/agregarCandidato", {
+      const res = await fetch("https://capybara-awards-back.vercel.app/agregarCandidato", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
