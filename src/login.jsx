@@ -59,7 +59,7 @@ function Login({ onLoginSuccess }) {
         {loading ? (
           <div className="flex flex-col items-center justify-center">
             <img
-              src="https://gifdb.com/images/high/capybara-roasting-marsmallow-animation-qcdhwlnzujo4qoza.webp"
+              src="https://i.pinimg.com/originals/a1/0e/71/a10e71e4e4245d2952ad40850d0124b3.gif"
               alt="Cargando..."
               className="w-64 h-64 mb-6"
             />

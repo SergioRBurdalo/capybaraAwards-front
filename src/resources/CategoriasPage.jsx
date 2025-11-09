@@ -12,7 +12,6 @@ export default function CategoriasPage() {
   const usuario = sessionStorage.getItem("username") || "Anónimo";
 
   useEffect(() => {
-    // fetch("https://capybara-awards-back.vercel.app/getCategorias")
     fetch("http://localhost:4001/getCategorias")
       .then((res) => res.json())
       .then((data) => setCategorias(data))
@@ -27,20 +26,16 @@ export default function CategoriasPage() {
     setMensaje("");
 
     try {
-      const res = await fetch(
-        // "https://capybara-awards-back.vercel.app/agregarCandidato",
-        "http://localhost:4001/agregarCandidato",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            categoriaId: selected._id,
-            candidato,
-            motivo,
-            usuario,
-          }),
-        }
-      );
+      const res = await fetch("http://localhost:4001/agregarCandidato", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          categoriaId: selected._id,
+          candidato,
+          motivo,
+          usuario,
+        }),
+      });
 
       const data = await res.json();
 
@@ -63,8 +58,15 @@ export default function CategoriasPage() {
     setLoading(false);
   };
 
+  // 🔹 Cerrar sesión
+  const handleLogout = () => {
+    sessionStorage.removeItem("username");
+    window.location.href = "/login"; // redirige al login
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0025] to-[#1a004d] text-white p-6 flex flex-col items-center">
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0025] to-[#1a004d] text-white p-6 flex flex-col items-center justify-between">
+      {/* HEADER */}
       <h1 className="text-4xl font-bold text-[#ffb347] mb-10 text-center">
         Categorías Capybara Awards 2025
       </h1>
@@ -92,6 +94,20 @@ export default function CategoriasPage() {
           </motion.div>
         ))}
       </div>
+
+      {/* FOOTER */}
+      <footer className="w-full flex flex-col items-center justify-center mt-10 mb-4 text-center">
+        <button
+          onClick={handleLogout}
+          className="px-6 py-3 rounded-lg text-black font-bold bg-gradient-to-r from-[#ffb347] to-[#ffcc33] hover:shadow-[0_0_20px_#ffb347] transition-all duration-200 mb-3"
+        >
+          Salir
+        </button>
+
+        <p className="text-xs text-[#a9a9ff] opacity-80">
+          © {new Date().getFullYear()} Capybara Awards 🍋 — All rights reserved.
+        </p>
+      </footer>
 
       {/* MODAL PORTAL 3D */}
       <AnimatePresence>
@@ -134,7 +150,6 @@ function ModalPortal3D({
   setSelected,
   handleVote,
 }) {
-  // Posición aleatoria del halo exterior
   const randomPosition = React.useMemo(() => {
     const positions = [
       { top: "-60px", left: "50%", translate: "-50%, 0" },
@@ -155,7 +170,7 @@ function ModalPortal3D({
         rotateY: 0,
         scale: 1,
         opacity: 1,
-        transition: { type: "spring", stiffness: 120, damping: 12 },
+        transition: { type: 'spring', stiffness: 120, damping: 12 },
       }}
       exit={{
         rotateY: -90,
