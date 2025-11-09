@@ -19,18 +19,18 @@ function App() {
       document.body.style.backgroundSize = 'cover';
       document.body.style.backgroundPosition = 'center';
       document.body.style.backgroundRepeat = 'no-repeat';
-      document.body.style.backgroundColor = '#1E90FF';
+      document.body.style.backgroundColor = '#5e00ff';
 
     } else {
       // Si no está autenticado, dejar el fondo predeterminado (por ejemplo, color azul)
       document.body.style.backgroundImage = '';
-      document.body.style.backgroundColor = '#1E90FF';  // Color azul
+      document.body.style.backgroundColor = '#5e00ff';  // Color azul
     }
 
     // Cleanup: quitar estilos cuando se desmonte el componente
     return () => {
       document.body.style.backgroundImage = '';
-      document.body.style.backgroundColor = '#1E90FF';
+      document.body.style.backgroundColor = '#5e00ff';
     };
   }, [isAuthenticated]);
 
