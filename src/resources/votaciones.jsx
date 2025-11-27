@@ -1,396 +1,257 @@
-import { useState, useEffect } from 'react';
-import ConfirmModal from './ConfirmModal';
-import PointConfirmModal from './PointConfirmModal'; // Nuevo modal para puntos
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import VotacionesSingle from "./votacionesSingle.jsx";
+import capiProfile from "../assets/fondo.jpeg";
 
-// Importación de todos los archivos
-import candidatoAdri from '../assets/candidato-adri.jpg';
-import candidatoAlexguti from '../assets/candidato-alexguti.jpg';
-import candidatoAna from '../assets/candidato-ana.jpg';
-import candidatoBuyi from '../assets/candidato-buyi.jpg';
-import candidatoCarlos from '../assets/candidato-carlos.jpg';
-import candidatoChavi from '../assets/candidato-chavi.jpg';
-import candidatoDanino from '../assets/candidato-danino.jpg';
-import candidatoFany from '../assets/candidato-fany.jpg';
-import candidatoJudith from '../assets/candidato-judith.jpg';
-import candidatoLaura from '../assets/candidato-laura.jpg';
-import candidatoLazaro from '../assets/candidato-lazaro.jpg';
-import candidatoMaria from '../assets/candidato-maria.jpg';
-import candidatoRaquel from '../assets/candidato-raquel.jpg';
-import candidatoRobert from '../assets/candidato-robert.jpg';
-import candidatoRobertcuchara from '../assets/candidato-robertcuchara.jpg';
-import candidatoRojas from '../assets/candidato-rojas.jpg';
-import candidatoSergio from '../assets/candidato-sergio.jpg';
-import candidatoVila from '../assets/candidato-vila.jpg';
-import buyiOgg from '../assets/buyi.ogg';
-import juditOgg from '../assets/judit.ogg';
-import capiProfile from '../assets/capi_profile.jpeg';
-import capyawardIco from '../assets/capyaward-ico.png';
-import capyiconNoBG from '../assets/capyiconNoBG.png';
-import carpinchoPng from '../assets/carpincho.png';
-import fondoJpeg from '../assets/fondo.jpeg';
-import limpiezaTardeo from '../assets/limpieza_tardeo.jpeg';
-import neveraPng from '../assets/nevera.png';
-import parkingVino from '../assets/parking_vino.jpeg';
-import porroMentiras from '../assets/porro_mentiras.png';
-import reactSvg from '../assets/react.svg';
-import shrekPng from '../assets/shrek.png';
-import candidatoCarlosSergio from '../assets/candidato-carlos_sergio.jpg';
-import candidatoAdriRobert from '../assets/candidato-adri_rober.jpg';
-import candidatoCarlosAdri from '../assets/candidato-carlos_adri.jpg';
-import candidatoRaquelAdriLaura from '../assets/candidato-raquel_adri_laura.jpg';
-import capiWeb from '../assets/Capiweb.png';
-import sonido from '../assets/sonido.png';
-
-// Mapeo de archivos con el nombre exacto del archivo como clave
-const assets = {
-  'candidato-adri.jpg': candidatoAdri,
-  'candidato-alexguti.jpg': candidatoAlexguti,
-  'candidato-ana.jpg': candidatoAna,
-  'candidato-buyi.jpg': candidatoBuyi,
-  'candidato-carlos.jpg': candidatoCarlos,
-  'candidato-chavi.jpg': candidatoChavi,
-  'candidato-danino.jpg': candidatoDanino,
-  'candidato-fany.jpg': candidatoFany,
-  'candidato-judith.jpg': candidatoJudith,
-  'candidato-laura.jpg': candidatoLaura,
-  'candidato-lazaro.jpg': candidatoLazaro,
-  'candidato-maria.jpg': candidatoMaria,
-  'candidato-raquel.jpg': candidatoRaquel,
-  'candidato-robert.jpg': candidatoRobert,
-  'candidato-robertcuchara.jpg': candidatoRobertcuchara,
-  'candidato-rojas.jpg': candidatoRojas,
-  'candidato-sergio.jpg': candidatoSergio,
-  'candidato-vila.jpg': candidatoVila,
-  'buyi.ogg': buyiOgg,
-  'judit.ogg': juditOgg,
-  'capi_profile.jpeg': capiProfile,
-  'capyaward-ico.png': capyawardIco,
-  'capyiconNoBG.png': capyiconNoBG,
-  'carpincho.png': carpinchoPng,
-  'fondo.jpeg': fondoJpeg,
-  'limpieza_tardeo.jpeg': limpiezaTardeo,
-  'nevera.png': neveraPng,
-  'parking_vino.jpeg': parkingVino,
-  'porro_mentiras.png': porroMentiras,
-  'react.svg': reactSvg,
-  'shrek.png': shrekPng,
-  'candidato-carlos_sergio.jpg': candidatoCarlosSergio,
-  'candidato-adri_rober.jpg': candidatoAdriRobert,
-  'candidato-carlos_adri.jpg': candidatoCarlosAdri,
-  'candidato-raquel_adri_laura.jpg': candidatoRaquelAdriLaura,
-  'Capiweb.png': capiWeb,
-  'sonido.png': sonido,
-};
-
-
-
-function Votaciones() {
+export default function VotacionesPage() {
   const [categorias, setCategorias] = useState([]);
-  const [categoriaActual, setCategoriaActual] = useState(0);
-  const [modalVisible, setModalVisible] = useState(true);
-  const [votados, setVotados] = useState({});
-  const [categoriaVotada, setCategoriaVotada] = useState(null);
-  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
-  const [pointConfirmModalVisible, setPointConfirmModalVisible] = useState(false);
-  const [selectedCandidato, setSelectedCandidato] = useState(null);
-  const [puntosSeleccionados, setPuntosSeleccionados] = useState([]); // Para orden de preferencia en multichoise
-  const [botonesNavegacionHabilitados, setBotonesNavegacionHabilitados] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [seleccion, setSeleccion] = useState({});
+  const [modal, setModal] = useState({ visible: false, mensaje: "" });
+  const [bloqueadas, setBloqueadas] = useState({});
 
+  const usuario = sessionStorage.getItem("username") || "Anónimo";
+
+  /* --------------------------------------------------------
+      CARGAR CATEGORÍAS Y DETECTAR VOTOS PREVIOS
+  --------------------------------------------------------- */
   useEffect(() => {
-    const fetchVotaciones = async () => {
-      try {
-        const response = await fetch('https://capybara-awards-back.vercel.app/getVotaciones');
-        const data = await response.json();
-        const nombreUsuario = sessionStorage.getItem('username');
+    fetch("https://capybara-awards-back.vercel.app/votaciones")
+      .then((res) => res.json())
+      .then((data) => {
+        setCategorias(data);
 
-        const categoriasAdaptadas = data
-          .filter((categoria) => !categoria.hidden)
-          .map((categoria) => {
-            const votoUsuario = categoria.votaciones.find((voto) => voto.nombreUsuario === nombreUsuario);
+        const bloqueos = {};
+        const sel = {};
 
-            const opciones = categoria.candidatos.map((candidato) => {
-              // Determina el color según los votos multichoise
-              let color = 'bg-white';
-              if (categoria.multichoise && votoUsuario) {
-                if (votoUsuario.tresPuntos === candidato.nombreCandidato) color = 'bg-yellow-300';
-                else if (votoUsuario.dosPuntos === candidato.nombreCandidato) color = 'bg-gray-400';
-                else if (votoUsuario.unPunto === candidato.nombreCandidato) color = 'bg-orange-500';
-              } else if (votoUsuario && votoUsuario.nombreCandidato === candidato.nombreCandidato) {
-                color = 'bg-green-200';
-              }
-
-              return {
-                id: candidato.idCandidato,
-                texto: candidato.nombreCandidato,
-                imagen: getAsset(candidato.idImagen),
-                descripcion: candidato.descripcion,
-                audio: candidato.idAudio ? getAsset(candidato.idAudio) : null,
-                usuarioPropuesto: candidato.usuarioPropuesto, // Agregar usuarioPropuesto
-                isVoted: !!votoUsuario,
-                color: color,
-              };
-            });
-
-            return {
-              idCategoria: categoria.idCategoria,
-              nombre: categoria.tituloCategoria,
-              descripcion: categoria.descripcion,
-              multichoise: categoria.multichoise,
-              opciones: opciones,
-            };
-          });
-
-        setCategorias(categoriasAdaptadas);
-        verificarBotonesNavegacion(categoriasAdaptadas[categoriaActual]);
-
-      } catch (error) {
-        console.error('Error al cargar las votaciones:', error);
-      }
-    };
-
-    fetchVotaciones();
-  }, [categoriaActual]);
-
-  const getAsset = (idImagen) => {
-    return assets[idImagen] || 'default-image.png';
-  };
-
-  const verificarBotonesNavegacion = (categoria) => {
-    if (categoria.multichoise && categoria.opciones.filter(op => op.color !== 'bg-white').length < 3) {
-      setBotonesNavegacionHabilitados(false);
-    } else {
-      setBotonesNavegacionHabilitados(true);
-    }
-  };
-
-  const handleNextCategoria = () => {
-    if (categoriaActual < categorias.length - 1) {
-      setCategoriaActual(categoriaActual + 1);
-      setCategoriaVotada(null);
-      setPuntosSeleccionados([]);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handlePrevCategoria = () => {
-    if (categoriaActual > 0) {
-      setCategoriaActual(categoriaActual - 1);
-      setCategoriaVotada(null);
-      setPuntosSeleccionados([]);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleVotar = (opcion) => {
-    const categoria = categorias[categoriaActual];
-    setSelectedCandidato(opcion);
-
-    if (categoria.multichoise) {
-      setPointConfirmModalVisible(true);
-    } else {
-      setConfirmModalVisible(true);
-    }
-  };
-
-  const confirmVoto = async () => {
-    const nombreUsuario = sessionStorage.getItem('username');
-    const idCategoria = categorias[categoriaActual].idCategoria;
-
-    try {
-      const response = await fetch('https://capybara-awards-back.vercel.app/guardarVoto', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          idCategoria,
-          nombreCandidato: selectedCandidato.texto,
-          nombreUsuario,
-        }),
-      });
-
-      if (response.ok) {
-        const categoriasActualizadas = categorias.map((categoria, index) => {
-          if (index === categoriaActual) {
-            return {
-              ...categoria,
-              opciones: categoria.opciones.map((opcion) =>
-                opcion.texto === selectedCandidato.texto
-                  ? { ...opcion, color: 'bg-green-200', isVoted: true }
-                  : opcion
-              ),
-            };
-          }
-          return categoria;
-        });
-
-        setCategorias(categoriasActualizadas);
-        setVotados((prevVotados) => ({ ...prevVotados, [selectedCandidato.id]: true }));
-        setCategoriaVotada(categoriaActual);
-        setConfirmModalVisible(false);
-      }
-    } catch (error) {
-      console.error('Error al registrar el voto:', error);
-      alert('Hubo un problema al registrar tu voto. Por favor, intenta de nuevo.');
-      setConfirmModalVisible(false);
-    }
-  };
-
-  const confirmPuntosVoto = async () => {
-    const nombreUsuario = sessionStorage.getItem('username');
-    const idCategoria = categorias[categoriaActual].idCategoria;
-    const tipoPunto = `${3 - puntosSeleccionados.length}Puntos`;
-
-    try {
-      await fetch('https://capybara-awards-back.vercel.app/guardarVotoPuntuado', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          idCategoria,
-          nombreUsuario,
-          fechaVotacion: new Date().toISOString(),
-          puntos: selectedCandidato.texto,
-          tipoPunto,
-        }),
-      });
-
-      const categoriasActualizadas = categorias.map((categoria, index) => {
-        if (index === categoriaActual) {
-          const newColor =
-            tipoPunto === '3Puntos' ? 'bg-yellow-300' : tipoPunto === '2Puntos' ? 'bg-gray-400' : 'bg-orange-500';
-
-          const opcionesActualizadas = categoria.opciones.map((opcion) =>
-            opcion.texto === selectedCandidato.texto ? { ...opcion, color: newColor, isVoted: true } : opcion
+        data.forEach((cat) => {
+          const yaVotado = cat.candidatos.find((c) =>
+            c.votadoPor.includes(usuario)
           );
 
-          return {
-            ...categoria,
-            opciones: opcionesActualizadas,
-          };
-        }
-        return categoria;
+          if (yaVotado) {
+            bloqueos[cat._id] = true;
+            sel[cat._id] = yaVotado.idCandidato;
+          }
+        });
+
+        setBloqueadas(bloqueos);
+        setSeleccion(sel);
+      })
+      .catch((err) => console.error("Error cargando votaciones:", err));
+  }, []);
+
+  const categoria = categorias[currentIndex];
+
+  /* --------------------------------------------------------
+      SCROLL TOP AL CAMBIAR DE CATEGORÍA
+  --------------------------------------------------------- */
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentIndex]);
+
+  /* --------------------------------------------------------
+      SELECCIONAR DESDE COMPONENTE HIJO
+  --------------------------------------------------------- */
+  const handleSeleccion = (id) => {
+    if (bloqueadas[categoria._id]) {
+      setModal({
+        visible: true,
+        mensaje: "Ya has votado en esta categoría.",
+      });
+      return;
+    }
+
+    setSeleccion({
+      ...seleccion,
+      [categoria._id]: id,
+    });
+  };
+
+  /* --------------------------------------------------------
+      BOTÓN VOTAR
+  --------------------------------------------------------- */
+  const votar = async () => {
+    const candidatoSeleccionado = seleccion[categoria._id];
+
+    if (!candidatoSeleccionado) {
+      return setModal({
+        visible: true,
+        mensaje: "⚠️ Selecciona un candidato antes de votar.",
+      });
+    }
+
+    try {
+      const res = await fetch("https://capybara-awards-back.vercel.app/votarSingle", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          categoriaId: categoria._id,
+          candidatoId: candidatoSeleccionado,
+          usuario,
+        }),
       });
 
-      setCategorias(categoriasActualizadas);
-      setPuntosSeleccionados((prev) => [...prev, selectedCandidato]);
-      setPointConfirmModalVisible(false);
+      const data = await res.json();
 
-      if (puntosSeleccionados.length + 1 === 3) {
-        verificarBotonesNavegacion(categoriasActualizadas[categoriaActual]);
+      if (!res.ok) {
+        return setModal({
+          visible: true,
+          mensaje: data.message || "Error enviando el voto.",
+        });
       }
-    } catch (error) {
-      console.error('Error al registrar el voto:', error);
-      alert('Hubo un problema al registrar tu voto. Por favor, intenta de nuevo.');
+
+      setBloqueadas({
+        ...bloqueadas,
+        [categoria._id]: true,
+      });
+
+      setModal({
+        visible: true,
+        mensaje: "✅ Voto registrado correctamente.",
+      });
+    } catch (err) {
+      setModal({
+        visible: true,
+        mensaje: "❌ Error de conexión con el servidor.",
+      });
     }
   };
 
+  /* --------------------------------------------------------
+      NAVEGACIÓN
+  --------------------------------------------------------- */
+  const siguiente = () => {
+    if (currentIndex < categorias.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const anterior = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  /* --------------------------------------------------------
+      RENDER PRINCIPAL
+  --------------------------------------------------------- */
   return (
-    <div className="container mx-auto p-4 relative">
-      {confirmModalVisible && (
-        <ConfirmModal
-          candidato={selectedCandidato?.texto}
-          onConfirm={confirmVoto}
-          onCancel={() => setConfirmModalVisible(false)}
-        />
-      )}
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0025] to-[#1a004d] text-white p-6 flex flex-col items-center relative">
 
-      {pointConfirmModalVisible && (
-        <PointConfirmModal
-          candidato={selectedCandidato?.texto}
-          puntos={3 - puntosSeleccionados.length}
-          onConfirm={confirmPuntosVoto}
-          onCancel={() => setPointConfirmModalVisible(false)}
-        />
-      )}
-
-      {modalVisible && (
-        <div className="fixed inset-0 bg-blue-300 flex items-center justify-center z-50 mr-2">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md">
-            <h2 className="text-2xl font-bold mb-4">Bienvenido a las Votaciones de los Capybara Awards 2024</h2>
-            <p className="mb-4">Este es el evento en el que podrás votar por tus candidatos favoritos. Haz clic en "Comenzar a votar" para iniciar.</p>
-            <button
-              onClick={() => setModalVisible(false)}
-              className="bg-blue-500 text-white py-2 px-4 rounded transition duration-200 hover:bg-blue-600"
+      {/* ------------------------- MODAL ------------------------- */}
+      <AnimatePresence>
+        {modal.visible && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 backdrop-blur-sm"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-[#12023a]/90 border border-[#ffb347] rounded-2xl p-6 shadow-[0_0_30px_#ffb347] max-w-sm w-full text-center"
+              initial={{ scale: 0.6, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.6, opacity: 0 }}
             >
-              Comenzar a votar
-            </button>
-          </div>
-        </div>
-      )}
+              <h2 className="text-xl font-bold text-[#ffb347] mb-4">Atención</h2>
+              <p className="text-[#d0cfff] mb-6">{modal.mensaje}</p>
 
-      {categorias.length > 0 && (
-        <>
-          <div className="bg-blue-100 p-6 rounded-lg shadow-md text-center mb-8">
-            <h1 className="text-2xl md:text-3xl font-bold mb-2 text-blue-800">
-              {categorias[categoriaActual].nombre}
-            </h1>
-            <p className="text-gray-700">{categorias[categoriaActual].descripcion}</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categorias[categoriaActual].opciones.map((opcion) => (
-              <div
-                key={opcion.id}
-                className={`relative w-full rounded-lg shadow-md p-4 flex flex-col items-center ${opcion.color}`}
+              <button
+                onClick={() => setModal({ visible: false, mensaje: "" })}
+                className="px-6 py-3 rounded-lg font-bold bg-gradient-to-r from-[#ffb347] to-[#ffcc33] text-black hover:shadow-[0_0_20px_#ffb347] transition-all"
               >
-                <div className="w-auto h-auto mb-2 flex justify-center items-center">
-                  <img src={opcion.imagen} alt={opcion.texto} className="w-full h-full object-cover rounded" />
-                </div>
-                <p className="text-xl text-center font-semibold">{opcion.texto}</p>
-                {opcion.usuarioPropuesto && opcion.usuarioPropuesto !== "" && (
-                  <p className="text-sm text-center text-gray-500 mt-1">Propuesto por: {opcion.usuarioPropuesto}</p>
-                )}
-                <p className="text-center mt-2">{opcion.descripcion}</p>
+                Entendido
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-                {opcion.audio && (
-                  <button
-                    onClick={() => {
-                      const audio = new Audio(opcion.audio);
-                      audio.play();
-                    }}
-                    className="bg-gray-200 text-gray-700 py-1 px-3 rounded mt-2"
-                  >
-                    ▶️ Reproducir Audio
-                  </button>
-                )}
+      {/* HEADER */}
+      <h1 className="text-3xl font-bold text-[#ffb347] mb-4 text-center">
+        Votaciones Capybara Awards 2025
+      </h1>
 
-                {!(categoriaVotada === categoriaActual) && !opcion.isVoted && !votados[opcion.id] && (
-                  <button
-                    onClick={() => handleVotar(opcion)}
-                    className="bg-blue-500 text-white py-2 px-4 rounded mt-4 transition duration-200 ease-in-out transform hover:bg-blue-600 hover:scale-105 active:bg-blue-700 active:scale-95"
-                  >
-                    {categorias[categoriaActual].multichoise ? `Seleccionar` : `Votar`}
-                  </button>
-                )}
+      {/* BOTÓN SALIR */}
+      <button
+        onClick={() => {
+          sessionStorage.removeItem("username");
+          window.location.href = "/login";
+        }}
+        className="px-6 py-3 mb-6 rounded-lg text-black font-bold bg-gradient-to-r from-[#ffb347] to-[#ffcc33] hover:shadow-[0_0_20px_#ffb347] transition-all duration-200"
+      >
+        Salir
+      </button>
+
+      {/* ------------------------- CONTENIDO ------------------------- */}
+      <AnimatePresence mode="wait">
+        {categoria && (
+          <motion.div
+            key={categoria._id}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+            className="w-full flex flex-col items-center"
+          >
+            {categoria.multichoise ? (
+              <div className="text-center text-red-400">
+                ⚠ MULTICHOICE pendiente (pronto)
               </div>
-            ))}
-          </div>
+            ) : (
+              <VotacionesSingle
+                categoria={categoria}
+                usuario={usuario}
+                seleccionActual={seleccion[categoria._id]}
+                onSeleccionChange={handleSeleccion}
+                bloqueada={bloqueadas[categoria._id]}
+              />
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          <div className="flex justify-between mt-8">
-            <button
-              onClick={handlePrevCategoria}
-              disabled={!botonesNavegacionHabilitados || categoriaActual === 0}
-              className="bg-gray-300 text-gray-700 py-2 px-4 rounded disabled:opacity-50"
-            >
-              &lt; Anterior
-            </button>
-            <span className="text-m mt-2 font-bold">
-              Categoría {categoriaActual + 1}/{categorias.length}
-            </span>
-            <button
-              onClick={handleNextCategoria}
-              disabled={!botonesNavegacionHabilitados || categoriaActual === categorias.length - 1}
-              className="bg-gray-300 text-gray-700 py-2 px-4 rounded disabled:opacity-50"
-            >
-              Siguiente &gt;
-            </button>
-          </div>
-        </>
+      {/* ------------------------- FOOTER ------------------------- */}
+      {categoria && (
+        <div className="fixed bottom-0 left-0 right-0 bg-[#0a0025]/80 p-4 backdrop-blur-md flex justify-center gap-6 border-t border-[#5e00ff]">
+          <button
+            onClick={anterior}
+            disabled={currentIndex === 0}
+            className={`px-5 py-3 rounded-lg font-bold bg-[#3b1c77] text-[#ffb347] transition-all ${
+              currentIndex === 0
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:bg-[#5e00ff]/60"
+            }`}
+          >
+            Anterior
+          </button>
+
+          <button
+            onClick={votar}
+            disabled={bloqueadas[categoria._id]}
+            className={`px-6 py-3 rounded-lg font-bold bg-gradient-to-r from-[#ffb347] to-[#ffcc33] text-black transition-all ${
+              bloqueadas[categoria._id]
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:shadow-[0_0_25px_#ffb347]"
+            }`}
+          >
+            Votar
+          </button>
+
+          <button
+            onClick={siguiente}
+            disabled={currentIndex >= categorias.length - 1}
+            className={`px-5 py-3 rounded-lg font-bold bg-gradient-to-r from-[#ffb347] to-[#ffcc33] text-black transition-all ${
+              currentIndex >= categorias.length - 1
+                ? "opacity-40 cursor-not-allowed"
+                : "hover:shadow-[0_0_25px_#ffb347]"
+            }`}
+          >
+            Siguiente
+          </button>
+        </div>
       )}
     </div>
   );
 }
-
-export default Votaciones;
