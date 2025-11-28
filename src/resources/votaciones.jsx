@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import VotacionesSingle from "./votacionesSingle.jsx";
+import VotacionesMulti from "./votacionesMulti";
 import capiProfile from "../assets/fondo.jpeg";
 
 export default function VotacionesPage() {
@@ -25,13 +26,43 @@ export default function VotacionesPage() {
         const sel = {};
 
         data.forEach((cat) => {
-          const yaVotado = cat.candidatos.find((c) =>
-            c.votadoPor.includes(usuario)
+          /* ----------------------------------------------
+             SINGLE
+          ---------------------------------------------- */
+          const votoSingle = cat.candidatos.find((c) =>
+            c.votadoPor?.includes(usuario)
           );
 
-          if (yaVotado) {
+          if (votoSingle) {
             bloqueos[cat._id] = true;
-            sel[cat._id] = yaVotado.idCandidato;
+            sel[cat._id] = votoSingle.idCandidato;
+          }
+
+          /* ----------------------------------------------
+             MULTI — detectar votosMulti y ordenarlos 3–2–1
+          ---------------------------------------------- */
+          const votosUsuario = [];
+
+          cat.candidatos.forEach((c) => {
+            if (Array.isArray(c.votosMulti)) {
+              const v = c.votosMulti.find((x) => x.usuario === usuario);
+              if (v) {
+                votosUsuario.push({
+                  candidatoId: c.idCandidato,
+                  puntos: v.puntos,
+                });
+              }
+            }
+          });
+
+          if (votosUsuario.length > 0) {
+            // Ordenar → 3, 2, 1
+            votosUsuario.sort((a, b) => b.puntos - a.puntos);
+
+            // Guardar solo los IDs en orden correcto
+            sel[cat._id] = votosUsuario.map((v) => v.candidatoId);
+
+            bloqueos[cat._id] = true;
           }
         });
 
@@ -51,20 +82,17 @@ export default function VotacionesPage() {
   }, [currentIndex]);
 
   /* --------------------------------------------------------
-      SELECCIONAR DESDE COMPONENTE HIJO
+      SELECCIONAR DESDE HIJOS (single o multi)
   --------------------------------------------------------- */
-  const handleSeleccion = (id) => {
+  const handleSeleccion = (data) => {
     if (bloqueadas[categoria._id]) {
-      setModal({
-        visible: true,
-        mensaje: "Ya has votado en esta categoría.",
-      });
+      setModal({ visible: true, mensaje: "Ya has votado en esta categoría." });
       return;
     }
 
     setSeleccion({
       ...seleccion,
-      [categoria._id]: id,
+      [categoria._id]: data,
     });
   };
 
@@ -72,24 +100,43 @@ export default function VotacionesPage() {
       BOTÓN VOTAR
   --------------------------------------------------------- */
   const votar = async () => {
-    const candidatoSeleccionado = seleccion[categoria._id];
+    if (!categoria) return;
 
-    if (!candidatoSeleccionado) {
+    const seleccionActual = seleccion[categoria._id];
+
+    if (
+      !seleccionActual ||
+      (categoria.multichoise && seleccionActual.length === 0)
+    ) {
       return setModal({
         visible: true,
-        mensaje: "⚠️ Selecciona un candidato antes de votar.",
+        mensaje: "⚠️ Selecciona al menos un candidato antes de votar.",
       });
     }
 
     try {
-      const res = await fetch("https://capybara-awards-back.vercel.app/votarSingle", {
+      const endpoint = categoria.multichoise
+        //? "https://capybara-awards-back.vercel.app/votarMulti"
+        ? "http://localhost:4001/votarMulti"
+        //: "https://capybara-awards-back.vercel.app/votarSingle";
+        : "http://localhost:4001/votarSingle";
+
+      const body = categoria.multichoise
+        ? {
+            categoriaId: categoria._id,
+            candidatoIds: seleccionActual,
+            usuario,
+          }
+        : {
+            categoriaId: categoria._id,
+            candidatoId: seleccionActual,
+            usuario,
+          };
+
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          categoriaId: categoria._id,
-          candidatoId: candidatoSeleccionado,
-          usuario,
-        }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -108,7 +155,7 @@ export default function VotacionesPage() {
 
       setModal({
         visible: true,
-        mensaje: "✅ Voto registrado correctamente.",
+        mensaje: "🦫✨ ¡Voto registrado correctamente!",
       });
     } catch (err) {
       setModal({
@@ -134,7 +181,7 @@ export default function VotacionesPage() {
   };
 
   /* --------------------------------------------------------
-      RENDER PRINCIPAL
+      RENDER
   --------------------------------------------------------- */
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0025] to-[#1a004d] text-white p-6 flex flex-col items-center relative">
@@ -196,9 +243,12 @@ export default function VotacionesPage() {
             className="w-full flex flex-col items-center"
           >
             {categoria.multichoise ? (
-              <div className="text-center text-red-400">
-                ⚠ MULTICHOICE pendiente (pronto)
-              </div>
+              <VotacionesMulti
+                categoria={categoria}
+                seleccionActual={seleccion[categoria._id] || []}
+                bloqueada={bloqueadas[categoria._id]}
+                onSeleccionChange={handleSeleccion}
+              />
             ) : (
               <VotacionesSingle
                 categoria={categoria}
@@ -219,9 +269,7 @@ export default function VotacionesPage() {
             onClick={anterior}
             disabled={currentIndex === 0}
             className={`px-5 py-3 rounded-lg font-bold bg-[#3b1c77] text-[#ffb347] transition-all ${
-              currentIndex === 0
-                ? "opacity-40 cursor-not-allowed"
-                : "hover:bg-[#5e00ff]/60"
+              currentIndex === 0 ? "opacity-40 cursor-not-allowed" : "hover:bg-[#5e00ff]/60"
             }`}
           >
             Anterior
