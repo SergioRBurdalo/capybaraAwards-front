@@ -116,10 +116,10 @@ export default function VotacionesPage() {
 
     try {
       const endpoint = categoria.multichoise
-        //? "https://capybara-awards-back.vercel.app/votarMulti"
-        ? "http://localhost:4001/votarMulti"
-        //: "https://capybara-awards-back.vercel.app/votarSingle";
-        : "http://localhost:4001/votarSingle";
+        ? "https://capybara-awards-back.vercel.app/votarMulti"
+        // ? "http://localhost:4001/votarMulti"
+        : "https://capybara-awards-back.vercel.app/votarSingle";
+        // : "http://localhost:4001/votarSingle";
 
       const body = categoria.multichoise
         ? {
