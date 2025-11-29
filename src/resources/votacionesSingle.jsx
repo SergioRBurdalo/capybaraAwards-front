@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import capiProfile from "../assets/fondo.jpeg";
 
@@ -16,6 +16,34 @@ export default function VotacionesSingle({
     onSeleccionChange(id);
   };
 
+  // Guardamos el último media que estaba reproduciéndose
+  const currentMediaRef = useRef(null);
+
+  const handleMediaPlay = (event) => {
+    // Si otro media estaba reproduciendo, lo pausamos
+    if (currentMediaRef.current && currentMediaRef.current !== event.target) {
+      currentMediaRef.current.pause();
+    }
+
+    // Este pasa a ser el actual
+    currentMediaRef.current = event.target;
+  };
+
+  // Detectar tipo de archivo según extensión
+  const getMediaType = (filename) => {
+    if (!filename) return "image";
+
+    const ext = filename.toLowerCase();
+
+    if (ext.endsWith(".mp4") || ext.endsWith(".mov") || ext.endsWith(".webm"))
+      return "video";
+
+    if (ext.endsWith(".mp3") || ext.endsWith(".wav") || ext.endsWith(".ogg"))
+      return "audio";
+
+    return "image"; // fallback
+  };
+
   return (
     <div className="w-full flex flex-col items-center">
       <h2 className="text-2xl font-bold text-[#ffb347] mb-2 text-center">
@@ -30,6 +58,8 @@ export default function VotacionesSingle({
       <div className="grid gap-6 w-full max-w-5xl sm:grid-cols-2 md:grid-cols-3 mb-32">
         {categoria.candidatos.map((cand) => {
           const isSelected = seleccionActual === cand.idCandidato;
+          const mediaType = getMediaType(cand.idImagen);
+          const mediaSrc = new URL(`../assets/${cand.idImagen}`, import.meta.url).href;
 
           return (
             <motion.div
@@ -46,20 +76,45 @@ export default function VotacionesSingle({
             >
               {/* BADGE TU VOTO */}
               {bloqueada && isSelected && (
-                <div className="absolute top-2 right-2 bg-gradient-to-r from-[#ffb347] to-[#ffcc33] text-black font-bold text-[10px] px-2 py-1 rounded-full shadow-[0_0_10px_#ffb347]">
+                <div className="absolute top-2 right-2 z-20 bg-gradient-to-r from-[#ffb347] to-[#ffcc33] text-black font-bold text-[10px] px-2 py-1 rounded-full shadow-[0_0_10px_#ffb347]">
                   TU VOTO
                 </div>
               )}
 
-              <img
-                src={`/candidatos/${cand.idImagen}`}
-                alt={cand.nombreCandidato}
-                className="w-full h-40 object-cover rounded-lg mb-4"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = capiProfile;
-                }}
-              />
+              {/* 🔥 MEDIA DINÁMICO (imagen, audio o vídeo) */}
+              <div className="relative w-full h-40 mb-4 overflow-hidden flex items-center justify-center">
+
+                {mediaType === "image" && (
+                  <img
+                    src={mediaSrc}
+                    alt={cand.nombreCandidato}
+                    className="w-full h-full object-contain rounded-lg"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = capiProfile;
+                    }}
+                  />
+                )}
+
+                {mediaType === "video" && (
+                  <video
+                    className="w-full h-full object-contain rounded-lg"
+                    src={mediaSrc}
+                    controls
+                    onPlay={handleMediaPlay}
+                  />
+                )}
+
+                {mediaType === "audio" && (
+                  <audio
+                    controls
+                    src={mediaSrc}
+                    className="w-full"
+                    onPlay={handleMediaPlay}
+                  />
+                )}
+
+              </div>
 
               <h3 className="text-xl font-bold text-[#ffb347]">
                 {cand.nombreCandidato}

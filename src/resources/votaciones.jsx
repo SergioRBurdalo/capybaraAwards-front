@@ -264,8 +264,8 @@ export default function VotacionesPage() {
 
       {/* ------------------------- FOOTER ------------------------- */}
       {categoria && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#0a0025]/80 p-4 backdrop-blur-md flex justify-center gap-6 border-t border-[#5e00ff]">
-          <button
+        <div className="fixed bottom-0 left-0 right-0 z-[9999] bg-[#0a0025]/80 p-4 backdrop-blur-md flex justify-center gap-6 border-t border-[#5e00ff]">
+        <button
             onClick={anterior}
             disabled={currentIndex === 0}
             className={`px-5 py-3 rounded-lg font-bold bg-[#3b1c77] text-[#ffb347] transition-all ${
